@@ -1,0 +1,20 @@
+.form-control{
+    border: none;
+    border-radius: 0;
+    font-size: 0.9375rem;
+    font-weight: 600!important;
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: #F0F0F7;
+    
+    &:active{
+        outline: none;
+        box-shadow: none;
+    }
+}
+h6{
+    font-size: 1rem;
+    font-weight: 600!important;
+    font-family: 'Source Sans Pro', sans-serif;
+    margin: 0;
+    width: 7rem;
+}

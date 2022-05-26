@@ -1,0 +1,14 @@
+<div [ngClass]="{'show': show}" class="alert">
+    {{ message }}
+</div>
+<div style="padding: 43px 0 0 20px ;" class="d-flex align-items-center">
+    <div class="wrapper" [ngClass]="{'loading': imageLoading}" [ngStyle]="{'background-image': 'url('+ imageSrc +')'}">
+        <div *ngIf="imageLoading" class="spinner-border text-light" role="status">
+        </div>
+    </div>  
+    <div style="margin: 0 0 0 21px;" class="d-flex align-items-center">
+        <input id="file1" type="file" class="custom-input" (input)="onChange($event)" accept=".png, .jpg, .jpeg"/>
+        <button (click)="uploadClicked()" class="custom-input-btn">Upload</button>
+        <button (click)="remove()" class="custom-input-btn">Remove</button>
+    </div>
+</div>

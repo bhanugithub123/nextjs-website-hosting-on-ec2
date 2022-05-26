@@ -1,0 +1,23 @@
+<div class="container-fluid" style="padding: 0; margin: 20px 0;">
+    <div *ngIf="!data_loaded" class="text-center mt-2">
+        <button class="btn btn-primary" style="background-color: #3BCBFF;border: none;color: #111D35;">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Loading Data...
+        </button>
+    </div>
+    <div class="transaction-container">
+        <div *ngIf="data_loaded" class="titles">
+            <span>Transaction on</span>
+            <span>Features</span>
+            <span>Date</span>
+            <span>Time</span>
+            <span>Total amount</span>
+        </div>
+        <div *ngIf="data_loaded" style="overflow-y: auto; height: calc(100vh - 16rem); width: 100%; padding: 0 15px;">
+            <ng-container *ngFor="let details of data;">
+                <transaction-card [details]="details" [filter]="filter"></transaction-card>
+            </ng-container>
+            
+        </div>
+    </div>
+</div>

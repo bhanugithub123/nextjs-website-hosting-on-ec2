@@ -1,0 +1,78 @@
+<div class="details-card">
+    <div class="column" style="justify-self: end;margin: 0 15px 0 0;">
+        <img style="padding: 0 0 3px 0;" *ngIf="!deactivated" src="/assets/icons/Path 396.svg" alt="user">
+        <img style="padding: 0 0 3px 0;" *ngIf="deactivated" src="/assets/icons/Path 406.svg" alt="user">
+    </div>
+    <div class="column" [ngClass]="{'deactivated': deactivated}">
+        <h4>{{name}}</h4>
+    </div>
+    <div class="column" [ngClass]="{'deactivated': deactivated}">
+        <h4 style="font-size: 11px;font-weight: 400;font-style: italic;">{{status}}</h4>
+    </div>
+    <div class="column" style="text-align: center;">
+        <img (click)="OpenModal()" style="cursor: pointer;margin: 0 0 2px 0;" src="/assets/icons/Path 417.svg" alt="user">
+    </div>
+</div>
+
+<div *ngIf="showPopup" class="pop-up" id="pop-main" (click)="CloseModalFromWrapper($event)">
+    <div class="pop-up-container">
+        <div style="position: absolute;right: 5px;top: 0; cursor: pointer;">
+            <img (click)="CloseModal()" src="/assets/icons/Icon ionic-ios-close.svg" alt="close icon">
+        </div>
+        <div style="padding: 25px 0 0 32px;display: flex;justify-content: flex-start;align-items: center;">
+            <div class="info-card">
+                <div>
+                    <h3>Amount Spent</h3>
+                    <h4>{{ amountSpent }}$</h4>
+                </div>
+            </div>
+            <div class="info-card">
+                <div>
+                    <h3>Credits Available</h3>
+                    <h4>{{creditsAvailable }}$</h4>
+                </div>
+            </div>
+            <div class="info-card">
+                <div>
+                    <h3>Space Allocation</h3>
+                    <h4>{{ spaceAvailable }} GB</h4>
+                </div>
+            </div>
+            <div class="info-card">
+                <div>
+                    <h3>Space Available</h3>
+                    <h4>{{ spaceAllocated }} GB</h4>
+                </div>
+            </div>
+        </div>
+        <!-- navigation -->
+        <div style="position: relative;">
+            <ul class="nav" style="margin: 5px 0 0 32px;">
+                <li class="nav-item" style="margin: 0 30px 0 0;" (mouseenter)="onVideoHover()" (mouseleave)="onVideoHover()">
+                  <a (click)="ToggleVideComponent()" class="nav-link" [ngClass]="{'active': videoComponentActive}">
+                      <img *ngIf="videoCompActive" src="/assets/icons/Icon awesome-video.svg" alt="video-comp">
+                      <img *ngIf="!videoCompActive" src="/assets/icons/Icon awesome-video alt.svg" alt="video-comp"> Video</a>
+                </li>
+                <li (mouseenter)="onImageHover()" (mouseleave)="onImageHover()" class="nav-item">
+                  <a (click)="ToggleImageComponent()" class="nav-link" [ngClass]="{'active': !videoComponentActive}">
+                    <img *ngIf="ImageComponentActive" src="/assets/icons/Icon ionic-md-image alt.svg" alt="image-comp">
+                    <img *ngIf="!ImageComponentActive" src="/assets/icons/Icon ionic-md-image.svg" alt="image-comp"> Image</a>
+                </li>
+            </ul>
+            <div style="position: absolute; right: 20px; top: 12px;display: flex;align-items: center;">
+                <span class="status" [ngClass]="{'blocked': UserBlocked}">Unblock</span>
+                <label class="switch" style="margin: 0 5px;">
+                    <input #blockcheckbox id="block-checkbox" type="checkbox" (change)="ToggleStatus()">
+                    <span class="slider round"></span>
+                </label>
+                <span class="status" [ngClass]="{'blocked': !UserBlocked}">Block</span>
+            </div>
+        </div>
+        <video-feature-details [id]="id" *ngIf="videoComponentActive"></video-feature-details>
+        <image-feature-details [id]="id" *ngIf="!videoComponentActive"></image-feature-details>
+        <!-- submit -->
+        <div class="d-flex align-items-center justify-content-center">
+            <button class="btn btn-primary" (click)="Submit()">Submit</button>
+        </div>
+    </div>
+</div>

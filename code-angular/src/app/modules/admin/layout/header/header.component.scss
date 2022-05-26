@@ -1,0 +1,93 @@
+.form-control {
+    border: none;
+    padding: 0 0 0 25px;
+    background-color: #F5F5F6;
+    border: 1px solid #F5F5F6;
+    &::placeholder {
+        color: #ccc;
+        font-size: 15px;
+        font-weight: 500;
+        letter-spacing: 0;
+    }
+    &:focus{
+        background-color: #FFF;
+        border: 1px solid #eaeaec;
+    }
+}
+*:focus{
+    outline: none;
+    box-shadow: none;
+}
+.profile-img {
+    background: url('../../../../../assets/images/ben-sweet-2LowviVHZ-E-unsplash.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+}
+.btn-primary-username {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    color: #43425D;
+    font-size: 15px;
+    text-align: left;
+    padding: 0.5rem 1rem;
+    &:active{
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        color: #43425D;
+        font-size: 15px;
+        text-align: left;
+    }
+}
+
+.dropdown-modal-close{
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0,0,0,0);
+    z-index: 11;
+    top: 0;
+    left: 0;
+}
+
+.dropdown-modal-logout{
+    position: absolute;
+    background: #FFF;
+    width: 197px;
+    height: 43px;
+    right: 0;
+    top: 100%;
+    z-index: 12;
+    .dropdown-item {
+        cursor: pointer;
+        width: 197px;
+        height: 43px;
+        font-size: 13px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        box-shadow: 0px 2px 10px #00000027;
+        color: #4D565C;
+        &:active{
+            background-color: #FFF;
+        }
+    }
+    &::before {
+        content: "";
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid #FFFFFF;
+        top: -8px;
+        right: 9px;
+        position: absolute;
+        margin: 0;
+        padding: 0;
+    }
+}

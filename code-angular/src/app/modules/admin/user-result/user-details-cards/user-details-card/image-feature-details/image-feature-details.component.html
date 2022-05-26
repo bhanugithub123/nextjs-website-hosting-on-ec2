@@ -1,0 +1,126 @@
+<div class="container-fluid" style="padding: 20px 15px 20px 30px;">
+    <h3 style="color: #FFF;font-family: 'Open Sans', sans-serif;font-size: 20px;font-weight: 600;">Features most used</h3>
+    <div>
+       <div class="d-flex align-items-center justify-content-start">
+        <!-- from date drop down -->
+        <div class="d-flex align-items-center justify-content-around">
+            <span style="color: #FFF;font-family: 'Open Sans', sans-serif;font-size: 12px;font-weight: 600;margin: 2px 16px 0 0;">From</span>
+            <div class="d-flex align-items-center justify-content-around">
+                <div style="position: relative;margin: 0 16px 0 0;">
+                    <select #day name="Date" (change)="onChange()" class="form-select day">
+                        <option value="null">dd</option>
+                        <option *ngFor="let day of Dates" [value]="day">{{ day }}</option>
+                    </select>
+                    <img style="position: absolute; top: 50%; right: 5px; z-index: -1;" src="/assets/icons/Path 26-w.svg" alt="drop icon">
+                </div>
+                <div style="position: relative;margin: 0 16px 0 0;">
+                    <select #month name="Month" (change)="onChange()" class="form-select month">
+                        <option value="null">mm</option>
+                        <option  *ngFor="let mn of Months;let i = index;" [value]="i + 1">{{ mn }}</option>
+                    </select>
+                    <img style="position: absolute; top: 50%; right: 5px; z-index: -1;" src="/assets/icons/Path 26-w.svg" alt="drop icon">
+                </div>
+                <div style="position: relative;">
+                    <select #year name="Year" (change)="onChange()" class="form-select year">
+                        <option value="null">yyyy</option>
+                        <option  *ngFor="let yr of Years" [value]="yr">{{ yr }}</option>
+                    </select>
+                    <img style="position: absolute; top: 50%; right: 5px; z-index: -1;" src="/assets/icons/Path 26-w.svg" alt="drop icon">
+                </div>
+            </div>
+        </div>
+        <!-- to date drop down -->
+        <div class="d-flex align-items-center justify-content-around">
+            <span style="color: #FFF;font-family: 'Open Sans', sans-serif;font-size: 12px;font-weight: 600;margin: 2px 24px 0 16px;">To</span>
+            <div class="d-flex align-items-center justify-content-around">
+                <div style="position: relative;margin: 0 16px 0 0;">
+                    <select #today name="Date" (change)="onChange()" class="form-select day">
+                        <option value="null">dd</option>
+                        <option  *ngFor="let day of Dates" [value]="day">{{ day }}</option>
+                    </select>
+                    <img style="position: absolute; top: 50%; right: 5px; z-index: -1;" src="/assets/icons/Path 26-w.svg" src="/assets/icons/Path 26-w.svg" alt="drop icon">
+                </div>
+                <div style="position: relative;margin: 0 16px 0 0;">
+                    <select #tomonth name="Month" (change)="onChange()" class="form-select month">
+                        <option value="null">mm</option>
+                        <option  *ngFor="let mn of Months;let i = index;" [value]="i + 1">{{ mn }}</option>
+                    </select>
+                    <img style="position: absolute; top: 50%; right: 5px; z-index: -1;" src="/assets/icons/Path 26-w.svg" alt="drop icon">
+                </div>
+                <div style="position: relative;">
+                    <select #toyear name="Year" (change)="onChange()" class="form-select year">
+                        <option value="null">yyyy</option>
+                        <option  *ngFor="let yr of Years" [value]="yr">{{ yr }}</option>
+                    </select>
+                    <img style="position: absolute; top: 50%; right: 5px; z-index: -1;" src="/assets/icons/Path 26-w.svg" alt="drop icon">
+                </div>
+            </div>
+        </div>
+       </div>
+        <div class="grid-container">
+            <div class="d-flex align-items-center justify-content-around">
+                <h5>Label detection</h5>
+                <div class="progress">
+                    <div class="progress-bar bg-blue" role="progressbar" [ngStyle]="{'width': FeatureObjectPercentage.label + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h6>{{ FeatureObject.label }} times</h6>
+            </div>
+            <div class="d-flex align-items-center justify-content-around">
+                <h5>Web detection</h5>
+                <div class="progress">
+                    <div class="progress-bar bg-green" role="progressbar" [ngStyle]="{'width': FeatureObjectPercentage.web + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h6>{{ FeatureObject.web }} times</h6>
+            </div>
+            <div class="d-flex align-items-center justify-content-around">
+                <h5>Explicit Content</h5>
+                <div class="progress">
+                    <div class="progress-bar bg-red" role="progressbar" [ngStyle]="{'width': FeatureObjectPercentage.safe + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h6>{{ FeatureObject.safe }} times</h6>
+            </div>
+            <div class="d-flex align-items-center justify-content-around">
+                <h5>Land detection</h5>
+                <div class="progress">
+                    <div class="progress-bar bg-orange" role="progressbar" [ngStyle]="{'width': FeatureObjectPercentage.land + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h6>{{ FeatureObject.land }} times</h6>
+            </div>
+            <div class="d-flex align-items-center justify-content-around">
+                <h5>Object detection</h5>
+                <div class="progress">
+                    <div class="progress-bar bg-yellow" role="progressbar" [ngStyle]="{'width': FeatureObjectPercentage.object + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h6>{{ FeatureObject.object }} times</h6>
+            </div>
+            <div class="d-flex align-items-center justify-content-around">
+                <h5>Face detection</h5>
+                <div class="progress">
+                    <div class="progress-bar bg-blue" role="progressbar" [ngStyle]="{'width': FeatureObjectPercentage.face + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h6>{{ FeatureObject.face }} times</h6>
+            </div>
+            <div class="d-flex align-items-center justify-content-around">
+                <h5>Text detection</h5>
+                <div class="progress">
+                    <div class="progress-bar bg-green" role="progressbar" [ngStyle]="{'width': FeatureObjectPercentage.text + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h6>{{ FeatureObject.text }} times</h6>
+            </div>
+            <div class="d-flex align-items-center justify-content-around">
+                <h5>Logo detection</h5>
+                <div class="progress">
+                    <div class="progress-bar bg-red" role="progressbar" [ngStyle]="{'width': FeatureObjectPercentage.logo + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h6>{{ FeatureObject.logo }} times</h6>
+            </div>
+            <div class="d-flex align-items-center justify-content-around">
+                <h5>Image Properties</h5>
+                <div class="progress">
+                    <div class="progress-bar bg-orange" role="progressbar" [ngStyle]="{'width': FeatureObjectPercentage.color + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h6>{{ FeatureObject.color }} times</h6>
+            </div>
+        </div>
+    </div>
+</div>

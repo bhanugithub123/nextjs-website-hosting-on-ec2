@@ -1,0 +1,96 @@
+$font-stack:    'Source Sans Pro', sans-serif;
+$primary-color: #111d35;
+$text-color : #ffffff;
+$input-color : #273870;
+$placeholder-color : #425287;
+$bg-image: url('/assets/images/Group\ 35.jpg');
+
+.container {
+    &.menu {
+        font-family: $font-stack;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        height: 53px;
+        margin: 20px 0 0 0;
+        display: flex;
+        justify-content: flex-start;
+        padding: 0;
+        &.active{
+            background-color: #081122;
+        }
+    }
+    .border {
+        width: 8px;
+        height: 53px;
+        width: 8px;
+        height: 53px;
+        margin: 0 10px 0 0;
+        background: $primary-color;
+        border: 1px solid $primary-color !important;
+        color: #6F83AB;
+        &:hover{
+            background:  #081122;
+            border: 1px solid  #081122 !important;
+        }
+        &.active{
+            background: #3BCBFF;
+            border: 1px solid #3BCBFF !important;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            color: #FFF;
+        }
+    }
+    &.menu.active {
+        background-color: #081122;
+    }
+    &.menu:hover {
+        background-color: #081122;
+    }
+}
+
+:focus {
+    outline: none;
+}
+@media (max-width: 989px){
+    .ng-sidebar__content{
+        transform: translateX(-260px)!important;
+        width: 100%!important;
+    }
+}
+
+.hamburger-menu{
+    height: 5px;
+    display: block;
+    width: 25px;
+    background-color: #FFF;
+    margin: 27px auto 0 auto;
+    position: relative;
+    cursor: pointer;
+    border-radius: 5px;
+    &::before{
+        content: " ";
+        height: 5px;
+        display: block;
+        width: 25px;
+        background-color: #FFF;
+        margin: 0 auto;
+        position: absolute;
+        bottom: -8px;
+        border-radius: 5px;
+    }
+    &::after{
+        content: " ";
+        height: 5px;
+        display: block;
+        width: 25px;
+        background-color: #FFF;
+        margin: 0 auto;
+        position: absolute;
+        bottom: -16px;
+        border-radius: 5px;
+    }
+}
+
+

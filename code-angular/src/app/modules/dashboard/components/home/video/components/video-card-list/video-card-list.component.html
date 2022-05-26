@@ -1,0 +1,8 @@
+<div>
+    <div class="grid-container">
+        <div *ngFor="let title of titles">
+            <video-card [videoData]="title" (Video_selected)="onChange()">
+            </video-card>
+        </div>
+    </div>
+</div>

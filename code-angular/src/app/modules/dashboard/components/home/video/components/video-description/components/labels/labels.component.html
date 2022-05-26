@@ -1,0 +1,12 @@
+<div class="grid-container">
+  <ng-container>
+    <div *ngFor="let f of availableFeature" class="card" (click)="SwitchFeature(f.label)">
+      <span>
+        <div class="card-body text-center">
+          <h5 class="card-title">{{f.count}}</h5>
+          <p class="card-text">{{f.label}}</p>
+        </div>
+      </span>
+    </div>
+  </ng-container>    
+</div>

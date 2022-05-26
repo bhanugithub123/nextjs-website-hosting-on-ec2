@@ -1,0 +1,60 @@
+<div *ngIf="contentPresent" style="height: calc(100vh - 30rem); overflow-y: auto; width: 865px; padding: 0 0 0 24px; margin: 11px 0 20px 0; overflow-x: hidden; scrollbar-width: thin; scrollbar-color: #3BCBFF transparent;display: block;min-height: 280px;">
+    <div style="width: 820px;margin: 0 0 15px 0;position: relative;">
+        <img style="position: absolute;top: 50%;transform: translateY(-50%);left: 10px;" src="../../../../../assets/icons/Search Icon.svg" alt="search">
+        <input style="padding-left: 30px;" type="text" class="form-control" (input)="onSearch($event)" placeholder="Search">
+    </div>
+    <ng-container *ngIf="searchTerm.length > 0">
+        <ng-container *ngFor="let o of objects;let i = index;">
+            <div
+             (mouseenter)="ToggleClockIcon(i)" 
+             (mouseleave)="ToggleClockIcon(i)" 
+             *ngIf="o.entity.toLowerCase().includes(searchTerm.toLowerCase())" 
+             class="card mt-1" 
+             [ngClass]="{'active': o.active}" 
+             (click)="Toggle(i, o.time)"
+             >
+                <span class="card-body d-flex align-items-center" style="padding: 0;height:100%;position: absolute;z-index: 1;width: 100%;left: 0;top: 0;">
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <img *ngIf="!o.active && !o.active_clock" style="width: 16px;" src="/assets/icons/Icon feather-clock.svg" alt="time">
+                        <img *ngIf="o.active" style="width: 16px;" src="/assets/icons/Icon feather-clock alt.svg" alt="time">
+                        <ng-container *ngIf="!o.active">
+                            <img *ngIf="o.active_clock" style="width: 16px;" src="/assets/icons/Icon feather-clock alt.svg" alt="time">
+                        </ng-container>   
+                        <div class="time text-center">{{ o.time }}</div>
+                    </div>
+                    <div class="content">{{ o.entity | titlecase }}</div>
+                    <div class="confidence">
+                        <h5>Confidence</h5>
+                        <div class="progress">
+                            <div class="progress-bar" [ngStyle]="{'width': o.confidence}"></div>
+                        </div>
+                        <h6>{{o.confidence}}</h6>
+                    </div>
+                </span>
+            </div>
+        </ng-container>        
+    </ng-container>
+    <ng-container *ngIf="searchTerm.length === 0">
+        <div (mouseenter)="ToggleClockIcon(i)" (mouseleave)="ToggleClockIcon(i)" *ngFor="let o of objects;let i = index;" class="card mt-1" [ngClass]="{'active': o.active}" (click)="Toggle(i, o.time)">
+            <span class="card-body d-flex align-items-center" style="padding: 0;height:100%;position: absolute;z-index: 1;width: 100%;left: 0;top: 0;">
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <img *ngIf="!o.active && !o.active_clock" style="width: 16px;" src="/assets/icons/Icon feather-clock.svg" alt="time">
+                        <img *ngIf="o.active" style="width: 16px;" src="/assets/icons/Icon feather-clock alt.svg" alt="time">
+                        <ng-container *ngIf="!o.active">
+                            <img *ngIf="o.active_clock" style="width: 16px;" src="/assets/icons/Icon feather-clock alt.svg" alt="time">
+                        </ng-container>   
+                    <div class="time text-center">{{ o.time }}</div>
+                </div>
+                <div class="content">{{ o.entity | titlecase }}</div>
+                <div class="confidence">
+                    <h5>Confidence</h5>
+                    <div class="progress">
+                        <div class="progress-bar" [ngStyle]="{'width': o.confidence}"></div>
+                    </div>
+                    <h6>{{o.confidence}}</h6>
+                </div>
+            </span>
+        </div>
+    </ng-container>    
+</div>
+<h3 *ngIf="!contentPresent" style="text-align: center;font-size: 22px;margin: 20px 0;">There is no content to display</h3>

@@ -1,0 +1,9 @@
+<div style="position: relative;margin: 0 0 0 25px;">
+    <div (click)="ToggleDropDown()" class="form-select">{{ selectedFilterName }}
+        <img *ngIf="!showDropDownMenu" style="border-style: none;position: absolute;top: 50%;right: 5px;" src="/assets/icons/Icon awesome-caret-down (1).svg" alt="dropdown-icon">
+        <img *ngIf="showDropDownMenu" style="border-style: none;position: absolute;top: 50%;right: 5px;transform: rotate(180deg);" src="/assets/icons/Icon awesome-caret-down (1).svg" alt="dropdown-icon">
+    </div>
+    <div class="select-dropdown" [ngClass]="{'active': showDropDownMenu}">
+        <span (click)="setName(filterName)" *ngFor="let filterName of dropdownList">{{ filterName }}</span>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="d-flex align-items-center">
+    <nav>
+        <ul class="pagination justify-content-end" style="margin: 0;padding: 5px 0 0 0;">
+          <li *ngFor="let page of Pages" class="page-item">
+            <a (click)="DetectPageChange(page.pagenumber + 1)" class="page-link" [ngClass]="{'active': page.active}">{{page.pagenumber + 1}}</a>
+          </li>
+        </ul>
+    </nav>
+    <input id="page-input" type="number" (input)="setPageNumber($event)" class="text-input">
+    <button (click)="JumpToPage()" class="btn btn-primary">Go</button>
+</div>

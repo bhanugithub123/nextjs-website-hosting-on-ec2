@@ -1,0 +1,218 @@
+@mixin btn-border-slide($color, $hoverColor, $borderWidth, $time) {
+    $easing: cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    display: inline-block;
+    padding: 0.5em 2em;
+    cursor: pointer;
+    overflow: hidden;
+  
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      height: $borderWidth;
+      width: 100%;
+      background-color: $color;
+    }
+  
+    &:before {
+      top: 0;
+    }
+  
+    &:after {
+      bottom: 0;
+    }
+  
+    &:hover {
+      & > * {
+        & > * {
+          &:before,
+          &:after {
+            -moz-transform: translate3d(0, 0, 0);
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+          }
+  
+          & > * {
+            &:before,
+            &:after {
+                -moz-transform: translate3d(0, 0, 0);
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+          }
+        }
+      }
+    }
+  
+    & > * {
+      &:before,
+      &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: $borderWidth;
+        background-color: $color;
+      }
+  
+      &:before {
+        left: 0;
+      }
+  
+      &:after {
+        right: 0;
+      }
+  
+      & > * {
+        &:before,
+        &:after {
+          content: "";
+          position: absolute;
+          left: 0;
+          z-index: 9;
+          height: $borderWidth;
+          width: 100%;
+          background-color: $hoverColor;
+        }
+  
+        &:before {
+          top: 0;
+          -moz-transform: translate3d(-105%, 0, 0);
+          -webkit-transform: translate3d(-105%, 0, 0);
+          transform: translate3d(-105%, 0, 0);
+          transition: transform $time $easing;
+        }
+  
+        &:after {
+          bottom: 0;
+          -moz-transform: translate3d(105%, 0, 0);
+          -webkit-transform: translate3d(105%, 0, 0);
+          transform: translate3d(105%, 0, 0);
+          transition: transform $time $easing;
+        }
+  
+        & > * {
+          &:before,
+          &:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            z-index: 9;
+            height: 100%;
+            width: $borderWidth;
+            background-color: $hoverColor;
+          }
+  
+          &:before {
+            left: 0;
+            -moz-transform: translate3d(0, 105%, 0);
+            -webkit-transform: translate3d(0, 105%, 0);
+            transform: translate3d(0, 105%, 0);
+            transition: transform $time $easing;
+          }
+  
+          &:after {
+            right: 0;
+            -moz-transform: translate3d(0, -105%, 0);
+            -webkit-transform: translate3d(0, -105%, 0);
+            transform: translate3d(0, -105%, 0);
+            transition: transform $time $easing;
+          }
+        }
+      }
+    }
+  }
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 85px);
+    column-gap: 10px;
+    row-gap: 10px;
+    .card{
+      margin: 0;
+      cursor: pointer;
+      width: 85px;
+      height: 85px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      word-wrap: break-word;
+      background-color: transparent;
+      background-clip: none;
+      border: none;
+      border-radius: 0;
+      @include btn-border-slide(transparent, #057DFB, 1px, 0.8s);
+  }
+  .card-body{
+      background: transparent;
+      color: #43425D;
+      font-family: "Open Sans", sans-serif;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 85px;
+      height: 85px;
+      border: 1px solid #CACED5;
+      position: absolute;
+      left: 0;
+      top: 0;
+      .card-title{
+          font-size: 25px;
+          font-weight: 600;
+          margin: 0;
+      }
+      .card-text{
+          font-size: 15px;
+          font-weight: 400;
+      }
+  }
+}
+
+@media(min-width: 1496px){
+  .grid-container{
+    grid-template-columns: repeat(3, 100px);
+  }
+  .card{
+    width: 100px !important;
+    height: 100px !important;
+  }
+  .card-body{
+    width: 100px !important;
+    height: 100px !important;
+  }
+  .card-title{
+    font-size: 28px!important;
+  }
+  .card-text{
+      font-size: 18px!important;
+  }
+}
+@media(min-width: 1596px){
+  .grid-container{
+    grid-template-columns: repeat(4, 100px);
+  }
+}
+@media(min-width: 1696px){
+  .grid-container{
+    grid-template-columns: repeat(5, 100px);
+  }
+}
+@media(min-width: 1796px){
+  .grid-container{
+    grid-template-columns: repeat(6, 100px);
+  }
+}
+@media(min-width: 1896px){
+  .grid-container{
+    grid-template-columns: repeat(7, 100px);
+  }
+}
+@media(min-width: 1956px){
+  .grid-container{
+    grid-template-columns: repeat(8, 85px);
+  }
+}

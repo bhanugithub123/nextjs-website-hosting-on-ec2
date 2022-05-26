@@ -1,0 +1,41 @@
+<div style="padding: 0 0 0 20px;">
+    <h3 style="color:#838383; font-size: 19px;font-weight: 600;font-family: 'Source Sans Pro';">Personal Details</h3>
+    <div class="container-fluid" style="padding: 0;">
+        <form [formGroup]="userDetailsForm">
+            <div class="form-group d-flex align-items-center">
+                <div class="d-flex align-items-center">
+                    <h6 style="margin: 0 0 0 5px;">First Name:</h6>
+                    <input
+                    type="text" 
+                    class="form-control"
+                    name="firstname"
+                    formControlName="firstname"
+                    style="padding: 0 0 0 2px;color: rgba(0,0,0,0.4);cursor: not-allowed;"
+                    >
+                </div>
+                <div *ngIf="LastNamePresent" class="d-flex align-items-center">
+                    <h6 >Last Name:</h6>
+                    <input
+                    type="text" 
+                    class="form-control"
+                    name="lastname"
+                    formControlName="lastname"
+                    style="padding: 0 0 0 2px;color: rgba(0,0,0,0.4);cursor: not-allowed;"
+                    >
+                </div>
+            </div>
+            <div class="form-group mt-2">
+                <div class="d-flex align-items-center">
+                    <h6 style="margin: 0 0 0 5px;width: 3rem;">Email:</h6>
+                    <input
+                    type="email" 
+                    class="form-control"
+                    name="email"
+                    formControlName="email"
+                    style="padding: 0 0 0 2px;color: rgba(0,0,0,0.4);cursor: not-allowed;"
+                    >
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

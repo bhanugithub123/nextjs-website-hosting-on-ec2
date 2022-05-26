@@ -1,0 +1,7 @@
+<div *ngIf="contentPresent" style="height: calc(100vh - 30rem); overflow-y: auto; width: 865px; padding: 0 0 0 24px; margin: 11px 0 20px 0; overflow-x: hidden; scrollbar-width: thin; scrollbar-color: #3BCBFF transparent;display: block;min-height: 280px;">
+    <person-card *ngFor="let landmark of filteredLandmarks" [Data]= "landmark.objects">
+        <h4 style="text-align:center;margin: 0;color: #0D76FF;font-size: 15px;font-weight: 600;font-family: 'Open Sans', sans-serif;">{{landmark.name}}</h4>
+    </person-card>
+</div>
+
+<h3 *ngIf="!contentPresent" style="text-align: center;font-size: 22px;margin: 20px 0;">There is no content to display</h3>

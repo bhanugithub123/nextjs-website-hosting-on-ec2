@@ -1,0 +1,90 @@
+$font-stack: 'Open Sans', sans-serif;
+$blue-color: #508FF4;
+$green: #1BC167;
+$red: #F45050;
+$orange: #F48C50;
+$yellow: #F4CE50;
+
+.grid-container{
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 25px 0 0 0;
+    h3{
+        font-family: $font-stack;
+        font-weight: 600;
+        font-size: 15px;
+    }
+    h5{
+        color: #FFF;
+        font-family: $font-stack;
+        font-weight: 600;
+        font-size: 11px;
+        margin: 0 0 11px 0;
+        width: 120px;
+    }
+    h6{
+        color: #FFF;
+        font-family: $font-stack;
+        font-weight: 400;
+        font-size: 11px;
+        margin: 0 0 11px 0;
+    }
+    .progress{
+        width: 190px;
+        height: 5px;
+        background: #D8D8D8;
+        border-radius: 31px;
+        margin: 0 0 11px 0;
+        .progress-bar{
+            border-radius: 31px;
+        }
+        .bg-blue{
+            background-color: $blue-color;
+        }
+        .bg-green{
+            background-color: $green;
+        }
+        .bg-red{
+            background-color: $red;
+        }
+        .bg-orange{
+            background-color: $orange;
+        }
+        .bg-yellow{
+            background-color: $yellow;
+        }
+    }
+}
+
+select{
+    appearance: none!important;
+}
+
+.form-select{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    color: #FFF;
+    background-color: transparent;
+    border: 1px solid #FFF;
+    border-radius: 3px;
+    position: relative;
+    cursor: pointer;
+    height: 20px;
+    padding: 0 0 2px 2px;
+    option{
+        color: #5E5E5E;
+    }
+    &:focus{
+        outline: none;
+    }
+    &.day{
+        width: 40px;        
+    }
+    &.month{
+        width: 75px;
+    }
+    &.year{
+        width: 50px;
+    }
+}

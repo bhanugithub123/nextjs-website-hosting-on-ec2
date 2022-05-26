@@ -1,0 +1,170 @@
+<div class="my-1 d-flex align-items-start justify-content-start" >
+    <div>
+    <!-- images -->
+    <div class="main-image" >
+        <div class="wrapper" style="position: relative;">
+            <!-- zoom controls -->
+            <div *ngIf="!showSpinner">
+                <div (click)="zoomMainImage()" id="zoom-in">
+                    <img src="/assets/icons/Group 407.svg" alt="Zoom In">
+                </div>
+                <div (click)="zoomOutMainImage()" id="zoom-out">
+                    <img src="/assets/icons/Group 408.svg" alt="Zoom Out">
+                </div>
+                <div (click)="ToggleDelete()" id="delete" *ngIf="showDeleteIcon">
+                    <img src="/assets/icons/Icon material-delete0 -w.svg" alt="delete">
+                </div>
+            </div>
+            <div *ngIf="imageLoader" class="text-center mt-2" class="loader">
+                <button class="btn btn-primary" style="background-color: #3BCBFF;border: none;color: #111D35;">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Loading Image...
+                </button>
+            </div>
+            <image-face-detection
+             *ngIf="loadComponent === 'Face' ? true:false"
+             [mainImageWidth]="mainImageWidth"
+             [mainImageHeight]="mainImageHeight"
+             [ImageData]="imageData"
+             [ImgUrl]="ImgUrl"
+             (imageLoader)="ImageLoaded($event)"
+             [face]="face"
+             >
+            </image-face-detection>
+            <app-image-text-detection
+             *ngIf="loadComponent === 'Text' ? true:false"
+             [mainImageWidth]="mainImageWidth"
+             [mainImageHeight]="mainImageHeight"
+             [ImageData]="imageData"
+             [ImgUrl]="ImgUrl"
+             [showText]="showText"
+             (imageLoader)="ImageLoaded($event)"
+             >
+
+            </app-image-text-detection>
+
+            <app-image-logo-detections
+             *ngIf="loadComponent === 'Logo Detection' ? true:false"
+             [mainImageWidth]="mainImageWidth"
+             [mainImageHeight]="mainImageHeight"
+             [ImageData]="imageData"
+             [ImgUrl]="ImgUrl"
+             (imageLoader)="ImageLoaded($event)"
+             [logo]="logo"
+             >
+
+            </app-image-logo-detections>
+            
+            <app-image-object-detections
+             *ngIf="loadComponent === 'Objects' ? true:false"
+             [mainImageWidth]="mainImageWidth"
+             [mainImageHeight]="mainImageHeight"
+             [ImageData]="imageData"
+             [ImgUrl]="ImgUrl"
+             (imageLoader)="ImageLoaded($event)"
+             [showObject]="objects"
+             >
+
+            </app-image-object-detections>
+
+            <app-image-label-detections
+             *ngIf="loadComponent === 'Label Detection' ? true:false"
+             [mainImageWidth]="mainImageWidth"
+             [mainImageHeight]="mainImageHeight"
+             [ImageData]="imageData"
+             [ImgUrl]="ImgUrl"
+             (imageLoader)="ImageLoaded($event)"
+             >
+
+            </app-image-label-detections>
+
+            <app-image-web-detections
+             *ngIf="loadComponent === 'Web Detection' ? true:false"
+             [mainImageWidth]="mainImageWidth"
+             [mainImageHeight]="mainImageHeight"
+             [ImageData]="imageData"
+             [ImgUrl]="ImgUrl"
+             [ImgUrl]="ImgUrl"
+             (imageLoader)="ImageLoaded($event)"
+             >
+
+            </app-image-web-detections>
+
+            <explicit-contents
+             *ngIf="loadComponent === 'Explicit Contents' ? true:false"
+             [mainImageWidth]="mainImageWidth"
+             [mainImageHeight]="mainImageHeight"
+             [ImageData]="imageData"
+             [ImgUrl]="ImgUrl"
+             (imageLoader)="ImageLoaded($event)"
+             >
+
+            </explicit-contents>
+
+            <image-landmarks
+             *ngIf="loadComponent === 'Landmarks' ? true:false"
+             [mainImageWidth]="mainImageWidth"
+             [mainImageHeight]="mainImageHeight"
+             [ImageData]="imageData"
+             [ImgUrl]="ImgUrl"
+             (imageLoader)="ImageLoaded($event)"
+             [landmark]="landmark"
+             >
+
+            </image-landmarks>
+
+            <image-properties
+             *ngIf="loadComponent === 'Image Properties' ? true:false"
+             [mainImageWidth]="mainImageWidth"
+             [mainImageHeight]="mainImageHeight"
+             [ImageData]="imageData"
+             [ImgUrl]="ImgUrl"
+             (imageLoader)="ImageLoaded($event)"
+             >
+
+            </image-properties>
+            
+            <default-image
+             *ngIf="loadComponent === 'default' ? true:false"
+             [mainImageWidth]="mainImageWidth"
+             [mainImageHeight]="mainImageHeight"
+             [ImgUrl]="ImgUrl"
+             (imageLoader)="ImageLoaded($event)"
+             >
+
+            </default-image>
+        </div>
+        <!-- other images -->
+        <other-images-cards (ImageInfo)="OpenImage($event)" [DetectDelete]="ImageDeleted"></other-images-cards>
+    </div>
+    </div>
+    <!-- image details  -->
+    <div class="image-details">
+        <app-image-info
+         (label)="ShowTextLabel($event)" 
+         (feature)="CurrentFeature($event)" 
+         [imageName]="imageName" 
+         [imageData] = "imageData"
+         [available_Features]="available_Features"
+         [not_available_Features]="not_available_Features"
+         (object)="ShowObject($event)"
+         (face)="ShowFace($event)"
+         (landmark)="ShowLandmark($event)"
+         (logo)="ShowLogo($event)"
+         ></app-image-info>
+    </div>
+</div>
+
+<!-- delete modal -->
+<div *ngIf="ShowDeleteModal" class="delete-modal">
+    <div style="display: flex;flex-direction: column;align-items: center;">
+        <h4>Are you sure you want to delete this image?</h4>
+        <div class="d-flex justify-content-center" style="margin: 32px 0 0 0;">
+            <button (click)="DeleteImage()" class="btn btn-primary-Enable">Yes
+                <div *ngIf="deleting" class="spinner-border" role="status" style="width: 12px;height: 12px;margin: 0 0 2px 0;">
+                </div>
+            </button>
+            <button (click)="ToggleDelete()" class="btn btn-primary-discard">No</button>
+        </div>
+    </div>
+</div>

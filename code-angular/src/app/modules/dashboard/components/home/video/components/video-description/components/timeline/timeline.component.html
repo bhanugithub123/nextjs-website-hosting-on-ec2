@@ -1,0 +1,7 @@
+<div class="timeline-container">
+  <div class="grid-container">
+    <ng-container *ngFor="let vid of availableVideos">
+      <timeline-video-card (VideoInfo)="OpenVideo($event)" [data]="vid"></timeline-video-card>
+    </ng-container> 
+  </div>
+</div>

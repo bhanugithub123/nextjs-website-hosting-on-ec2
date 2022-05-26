@@ -1,0 +1,29 @@
+<div class="d-flex align-items-center flex-column justify-content-center" style="padding: 4px 5px 0 0;">
+    <div class="file-container">
+        <img
+        width="40px"
+        height="40px"
+        [src]="Thumbnail" 
+        alt="no preview"
+        >
+        <div class="d-flex align-items-center flex-column">
+            <h6>
+                {{ Name }}
+            </h6>
+            <div  class="d-flex align-items-center flex-column" style="position: relative;margin: 3px 0 0 0;">
+                <div class="progress" style="width: 250px; border-radius: 5px;height: 4px;">
+                    <div
+                    class="progress-bar" 
+                    [style.width.%]="Progress.value"
+                    style=" background-color: #187AFF; border-radius: 9px;"
+                    ></div>
+                </div>
+                <span style="color: white;margin: 5px 0 0 0;position: absolute;left: 0; font-size: 9px;">
+                    Uploaded
+                </span>
+            </div>
+        </div>
+        
+    </div>
+    <hr style="border-top: 1px solid rgba(255, 255, 255, 0.2); width: 347px;margin: 20px 0 0 0;">
+</div>

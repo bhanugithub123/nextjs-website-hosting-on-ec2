@@ -1,0 +1,16 @@
+<div *ngIf="contentPresent" style="height: calc(100vh - 30rem); overflow-y: auto; width: 865px; padding: 0 0 0 24px; margin: 11px 0 20px 0; overflow-x: hidden; scrollbar-width: thin; scrollbar-color: #3BCBFF transparent;display: block;min-height: 280px;" >
+    <div *ngFor="let o of objects;let i = index;" class="card mt-1" (mouseenter)="ToggleClockIcon(i)" (mouseleave)="ToggleClockIcon(i)" (click)="Toggle(i, o.time)" [ngClass]="{'active': o.active}">
+        <div class="card-body d-flex align-items-center" style="background-color: transparent;padding: 0;">
+            <div class="d-flex align-items-center justify-content-center flex-column">
+                <img *ngIf="!o.active && !o.active_clock" style="width: 16px;" src="/assets/icons/Icon feather-clock.svg" alt="time">
+                        <img *ngIf="o.active" style="width: 16px;" src="/assets/icons/Icon feather-clock alt.svg" alt="time">
+                        <ng-container *ngIf="!o.active">
+                            <img *ngIf="o.active_clock" style="width: 16px;" src="/assets/icons/Icon feather-clock alt.svg" alt="time">
+                        </ng-container>  
+                <div class="time text-center">{{ o.time }}</div>
+            </div>
+            <div class="desc">Pornography : <small>{{ o.entity | titlecase }}</small></div>
+        </div>
+    </div>
+</div>
+<h3 *ngIf="!contentPresent" style="text-align: center;font-size: 22px;margin: 20px 0;">There is no content to display</h3>

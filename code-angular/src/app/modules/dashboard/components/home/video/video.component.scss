@@ -1,0 +1,44 @@
+$font-stack : 'Source Sans Pro', sans-serif;
+.show-more {
+    font-family: $font-stack;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    button{
+        border: none;
+        font-size: 14px;
+        font-weight: 600;
+        width: 90px;
+        height: 32px;
+        background: #3BCBFF;
+        border-radius: 4px;
+        color: #111D35;
+        position: relative;
+        transition: background-color 250ms ease-in-out;
+        &:hover,
+        &:focus {
+            border: 1px solid #3bcbff;
+            background-color: #FFF;
+            box-shadow: none;
+        }
+    }  
+
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 12rem);
+    column-gap: 1rem;
+}
+@media (min-width : 1536px){
+    .grid-container {
+        grid-template-columns: repeat(6, 12rem);
+    }
+}
+@media (min-width : 1736px){
+    .grid-container {
+        grid-template-columns: repeat(7, 12rem);
+    }
+}
+

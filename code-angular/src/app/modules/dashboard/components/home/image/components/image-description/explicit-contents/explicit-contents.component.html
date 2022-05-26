@@ -1,0 +1,16 @@
+<drag-scroll [scrollbar-hidden]="true" style="height: 462px;width:585px;pointer-events: auto;position: relative;">
+    <div 
+    style="position: relative;background-color: #000;" 
+    (mousedown)="Grabbing()" 
+    (mouseup)="Grab()" 
+    [ngStyle]="{'height': mainImageHeight, 'width': mainImageWidth, 'cursor':cursorType}"
+    >
+        <img
+        #img 
+        class="img"
+        [src]="ImgUrl"
+        (load)="ImageLoaded()"
+        [ngStyle]="{'height': mainImageHeight, 'width': mainImageWidth, 'cursor':cursorType}"
+        />  
+    </div>
+</drag-scroll>

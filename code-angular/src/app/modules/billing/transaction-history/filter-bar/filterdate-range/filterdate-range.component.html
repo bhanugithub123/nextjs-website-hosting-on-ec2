@@ -1,0 +1,64 @@
+<div class="d-flex align-items-center justify-content-start">
+    <span class="head-tag">From</span>
+    <div>
+        <!-- from date drop down -->
+        <div class="d-flex align-items-center justify-content-around">
+            <div class="d-flex align-items-center justify-content-around">
+                <div style="position: relative;margin: 0 12px 0 0;">
+                    <select #day name="Date" class="form-select day">
+                        <option value="null">dd</option>
+                        <option *ngFor="let day of Dates" [value]="day.value">{{ day.label }}</option>
+                    </select>
+                    <img style="transform: translateY(-50%);position: absolute; top: 50%; right: 5px; z-index: 0;" src="/assets/icons/Icon awesome-caret-down (1).svg" alt="drop icon">
+                </div>
+                <div style="position: relative;margin: 0 12px 0 0;">
+                    <select #month name="Month" class="form-select month">
+                        <option value="null">mm</option>
+                        <option *ngFor="let mn of Months;let i = index;" [value]="i + 1">{{ mn }}</option>
+                    </select>
+                    <img style="transform: translateY(-50%);position: absolute; top: 50%; right: 5px; z-index: 0;" src="/assets/icons/Icon awesome-caret-down (1).svg" alt="drop icon">
+                </div>
+                <div style="position: relative;margin: 0 31px 0 0;">
+                    <select #year name="Year" class="form-select year">
+                        <option value="null">yyyy</option>
+                        <option *ngFor="let yr of Years" [value]="yr">{{ yr }}</option>
+                    </select>
+                    <img style="transform: translateY(-50%);position: absolute; top: 50%; right: 5px; z-index: 0;" src="/assets/icons/Icon awesome-caret-down (1).svg" alt="drop icon">
+                </div>
+            </div>
+        </div>
+    </div>
+    <span class="head-tag">To</span>
+    <div>
+        <!-- to date drop down -->
+        <div class="d-flex align-items-center justify-content-around">
+            <div class="d-flex align-items-center justify-content-around">
+                <div style="position: relative;margin: 0 12px 0 0;">
+                    <select #today name="Date" class="form-select day">
+                        <option value="null">dd</option>
+                        <option *ngFor="let day of Dates" [value]="day.value">{{ day.label }}</option>
+                    </select>
+                    <img style="transform: translateY(-50%);position: absolute; top: 50%; right: 5px; z-index: 0;" src="/assets/icons/Icon awesome-caret-down (1).svg" alt="drop icon">
+                </div>
+                <div style="position: relative;margin: 0 12px 0 0;">
+                    <select #tomonth name="Month" class="form-select month">
+                        <option value="null">mm</option>
+                        <option *ngFor="let mn of Months;let i = index;" [value]="i + 1">{{ mn }}</option>
+                    </select>
+                    <img style="transform: translateY(-50%);position: absolute; top: 50%; right: 5px; z-index: 0;" src="/assets/icons/Icon awesome-caret-down (1).svg" alt="drop icon">
+                </div>
+                <div style="position: relative;margin: 0 31px 0 0;">
+                    <select #toyear name="Year" class="form-select year">
+                        <option value="null">yyyy</option>
+                        <option *ngFor="let yr of Years" [value]="yr">{{ yr }}</option>
+                    </select>
+                    <img style="transform: translateY(-50%);position: absolute; top: 50%; right: 5px; z-index: 0;" src="/assets/icons/Icon awesome-caret-down (1).svg" alt="drop icon">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <button (click)="onSearch()" class="btn btn-primary-search">Search</button>
+        <button (click)="onRefresh()" style="margin:0 0 0 10px;" class="btn btn-primary-search">Reset</button>
+    </div>
+</div>

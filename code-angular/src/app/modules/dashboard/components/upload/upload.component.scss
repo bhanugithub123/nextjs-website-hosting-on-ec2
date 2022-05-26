@@ -1,0 +1,77 @@
+$font-stack: 'Source Sans Pro', sans-serif;
+.nav-tabs {
+    display: flex;
+    justify-content: center;
+    width: 508px;
+    height: 25px;
+    border-bottom: 1px solid #1F2F4D;
+    .nav-item {
+        font-family: $font-stack;
+        cursor: pointer;
+        .video-link{
+            &::after{
+                content: "";
+                position: absolute;
+                display: inline-block;
+                width: 100%;
+                height: 3px;
+                background-color: #27C6FF;
+                bottom: -2px;
+                left: 0;
+                transform: scale(0);
+                transform-origin: right;
+                -moz-transform-origin: right;
+                -webkit-transform-origin: right;
+                transition: transform 250ms ease-in-out;
+            }
+            &.active::after{
+                transform: scale(1);
+            }
+        }
+        .image-link{
+            &::after{
+                content: "";
+                position: absolute;
+                display: inline-block;
+                width: 100%;
+                height: 3px;
+                background-color: #27C6FF;
+                bottom: -2px;
+                left: 0;
+                transform: scale(0);
+                transform-origin: left;
+                -moz-transform-origin: left;
+                -webkit-transform-origin: left;
+                transition: transform 250ms ease-in-out;
+            }
+            &.active::after{
+                transform: scale(1);
+            }
+        }
+        .nav-link{
+            color: #9A99AA;
+            padding: 0;
+            width: 90px;
+            font-size: 15px;
+            font-weight: 500;
+            position: relative;
+            &.active {
+                color: #27C6FF;
+                font-weight: 400;            
+                border: none;
+                background: transparent;
+            }
+            &.active:hover {
+                color: #27C6FF;
+                font-weight: 400;            
+                border: none;
+                background: transparent;
+            }
+            &:hover {
+                color: #27C6FF;
+                border: none;
+            }
+        }
+        
+    }
+}

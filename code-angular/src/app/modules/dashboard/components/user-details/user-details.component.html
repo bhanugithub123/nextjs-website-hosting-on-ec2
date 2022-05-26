@@ -1,0 +1,36 @@
+<div [ngClass]="{'show': show}" class="alert">
+    {{ message }}
+</div>
+<app-sidebar>
+    <div style="background-color: #F0F0F7;width: 1100px;height: 100vh;overflow: hidden;">
+        <div>
+            <div style="margin: 35px 0 0 0;">
+                <app-profile-image
+                 [clearFile]="clearFile"
+                 (uploadNotify)="onUploadNotify($event)"
+                 (uploadedFile)="UploadedFile($event)"
+                 ></app-profile-image>
+            </div>
+            <div style="margin: 40px 0 0 0;">
+                <app-user-login-details></app-user-login-details>
+            </div>
+            <hr>
+            <div style="margin: 0 0 0 0;">
+                <app-user-password
+                 [checkPasswordChange]="checkPasswordChange"
+                ></app-user-password>
+            </div>
+            <div class="d-flex align-items-center justify-content-end" style="padding: 0 138px 0 0;">
+                <button [disabled]="saveDisabled" (click)="clear()" class="btn btn-primary-discard" [ngStyle]="{'cursor': saveDisabled? 'not-allowed' : 'pointer'}">
+                    <span style="position: absolute;width: 100%;height: 100%;top: 0;left: 0;padding: 6px 0 0 0;z-index: 2;">Reset</span></button>
+                <div class="d-flex align-items-center">
+                    <button [disabled]="saveDisabled" (click)="submit()" class="btn btn-primary" [ngStyle]="{'cursor': saveDisabled? 'not-allowed' : 'pointer'}">
+                        <span style="position: absolute;width: 100%;height: 100%;top: 0;left: 0;padding: 6px 0 0 0;z-index: 2;">Save</span>
+                    </button>
+                    <div *ngIf="showSpinner" style="width: 12px;height: 12px;margin: 0 0 0 6px;" class="spinner-border" role="status">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-sidebar>

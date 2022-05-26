@@ -1,0 +1,48 @@
+<app-sidebar>
+    <div class="container-fluid deleted" >
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a
+               #video
+               class="nav-link active"  
+               (click)="setVideoVisibilty()"
+               >
+               <img
+                style="padding-bottom: 3px;" 
+                *ngIf="!setImageActive" 
+                src="../../../../../assets/icons/Icon awesome-video.svg" 
+                alt="Video"
+                >
+               <img 
+                style="padding-bottom: 3px;" 
+                *ngIf="setImageActive" 
+                src="../../../../../assets/icons/Icon awesome-video alt.svg" 
+                alt="Video"
+                > Video
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+               #image
+               class="nav-link" 
+               (click)="routeToImage()" 
+               >
+               <img 
+                style="padding-bottom: 3px;" 
+                *ngIf="!setImageActive" 
+                src="../../../../../assets/icons/Icon ionic-md-image.svg" 
+                alt="Image"
+                >
+               <img 
+                style="padding-bottom: 3px;" 
+                *ngIf="setImageActive" 
+                src="../../../../../assets/icons/Icon ionic-md-image alt.svg" 
+                alt="Image"
+                > Image
+              </a>
+            </li>
+          </ul>
+        <deleted-videos *ngIf="!setImageActive"></deleted-videos>  
+        <deleted-images *ngIf="setImageActive"></deleted-images>  
+    </div>
+</app-sidebar>

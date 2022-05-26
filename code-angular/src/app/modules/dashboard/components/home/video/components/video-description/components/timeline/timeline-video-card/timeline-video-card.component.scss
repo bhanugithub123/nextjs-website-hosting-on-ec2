@@ -1,0 +1,77 @@
+.card{
+    margin: 0;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.card-body{
+    cursor: pointer;
+    width: 85px;
+    height: 85px;
+    background: #585858 0% 0% no-repeat padding-box;
+    border-radius: 2px;
+    color: #43425D;
+    font-family: 'Source Sans Pro', sans-serif;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .card-title{
+        font-size: 25px;
+        font-weight: 600;
+        margin: 0;
+    }
+    .card-text{
+        font-size: 15px;
+        font-weight: 500;
+    }
+}
+
+.video-name {
+    display: none;
+    width: 270px;
+    color: #FFF;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 0 5px;
+    position: absolute;
+    left: 2px;
+    top: 28px;
+    z-index: 2;
+    &::before {
+        content: "";
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid rgba(0, 0, 0, 0.8);
+        top: -8px;
+        left: 4px;
+        position: absolute;
+        margin: 0;
+        padding: 0;
+    }
+    &.show {
+        display: block;
+    }
+}
+@media(min-width: 1496px){
+    .grid-container{
+      grid-template-columns: repeat(4, 100px);
+    } 
+    .card{
+      width: 100px !important;
+      height: 100px !important;
+    }
+    .card-body{
+      width: 100px !important;
+      height: 100px !important;
+      img{
+        width: 100px !important;
+        height: 100px !important;
+      }
+    }
+  }

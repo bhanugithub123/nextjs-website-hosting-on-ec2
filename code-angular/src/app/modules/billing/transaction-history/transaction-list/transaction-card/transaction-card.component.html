@@ -1,0 +1,47 @@
+<div class="container-fluid transaction-card" *ngIf="filter.length > 0 && details_object.type===filter ? true : false">
+    <div class="d-flex align-items-center flex-column">
+        <img width="98px" height="52px" *ngIf="imgPresent" [src]="details_object.file_url" alt="no-thumbnail">
+        <span *ngIf="imgPresent" style="word-break: break-all;" data-toggle="tooltip" data-placement="top" [title]="details_object.fullname">
+            {{details_object.name}}
+        </span>
+        <span *ngIf="!imgPresent" style="font-size: 18px;font-weight: 600;">
+            {{details_object.name}}
+        </span>
+    </div>
+    <span>
+        {{details_object.feature}}
+    </span>
+    <span>
+        {{details_object.date | date:'d MMMM y'}}
+    </span>
+    <span>
+        {{details_object.time}}
+    </span>
+    <span class="amount" [ngClass]="{'credited': credited, 'debited': debited, 'failed': failed}">
+        {{details_object.amount}}
+    </span>
+</div>
+<div class="container-fluid transaction-card" *ngIf="filter.length === 0 || filter === 'All'">
+    <div class="d-flex align-items-center flex-column">
+        <img width="98px" height="52px" *ngIf="imgPresent" [src]="details_object.file_url" alt="no-thumbnail">
+        <span *ngIf="imgPresent" style="word-break: break-all;" data-toggle="tooltip" data-placement="top" [title]="details_object.fullname">
+            {{details_object.name}}
+        </span>
+        <span *ngIf="!imgPresent" style="font-size: 18px;font-weight: 600;">
+            {{details_object.name}}
+        </span>
+    </div>
+    <span>
+        {{details_object.feature}}
+    </span>
+    <span>
+        {{details_object.date | date:'d MMMM y'}}
+    </span>
+    <span>
+        {{details_object.time}}
+    </span>
+    <span class="amount" [ngClass]="{'credited': credited, 'debited': debited, 'failed': failed}">
+        {{details_object.amount}}
+    </span>
+</div>
+

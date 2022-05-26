@@ -1,0 +1,223 @@
+$font-stack:    'Source Sans Pro', sans-serif;
+$primary-color: #111d35;
+$text-color : #ffffff;
+$input-color : #273870;
+$placeholder-color : #425287;
+$bg-image: url('/assets/images/Group\ 35.jpg');
+
+.container {
+    &.menu {
+        font-family: $font-stack;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        height: 53px;
+        margin: 20px 0 0 0;
+        display: flex;
+        justify-content: flex-start;
+        padding: 0;
+        img{
+            opacity: 0.4;
+        }
+        .border {
+            width: 8px;
+            height: 53px;
+            width: 8px;
+            height: 53px;
+            margin: 0 10px 0 0;
+            background: $primary-color;
+            border: 1px solid $primary-color !important;
+        }
+        &:hover, &.active {
+            background-color: #081122;
+            img{
+                opacity: 1;
+            }
+            .border {
+                width: 8px;
+                height: 53px;
+                width: 8px;
+                height: 53px;
+                margin: 0 10px 0 0;
+                background: $primary-color;
+                border: 1px solid $primary-color !important;
+                background: #3BCBFF;
+                border: 1px solid #3BCBFF !important;
+                border-top-right-radius: 4px;
+                border-bottom-right-radius: 4px;
+            }
+        }
+    }
+}
+
+:focus {
+    outline: none;
+}
+@media (max-width: 989px){
+    .ng-sidebar__content{
+        transform: translateX(-260px)!important;
+        width: 100%!important;
+    }
+}
+
+.hamburger-menu{
+    height: 5px;
+    display: block;
+    width: 25px;
+    background-color: #FFF;
+    margin: 27px auto 0 auto;
+    position: relative;
+    cursor: pointer;
+    border-radius: 5px;
+    &::before{
+        content: " ";
+        height: 5px;
+        display: block;
+        width: 25px;
+        background-color: #FFF;
+        margin: 0 auto;
+        position: absolute;
+        bottom: -8px;
+        border-radius: 5px;
+    }
+    &::after{
+        content: " ";
+        height: 5px;
+        display: block;
+        width: 25px;
+        background-color: #FFF;
+        margin: 0 auto;
+        position: absolute;
+        bottom: -16px;
+        border-radius: 5px;
+    }
+}
+.amount{
+    min-width: 66px;
+    min-height: 66px;
+    border: 3px solid #042757;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 23px 0;
+    padding: 0 2px;
+}
+.btn-addmore{
+    width: 147px;
+    height: 50px;
+    background: #3BCBFF;
+    border: 1px solid #3BCBFF;
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'Open Sans', sans-serif;
+    color: #111D35;
+    &:hover{
+        background-color: transparent;
+        color: #FFF;
+        box-shadow: 0px 3px 6px #00000061;
+    }
+}
+
+.paynow-modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    min-width: 1095px;
+    background-color: rgba($color: #000000, $alpha: 0.2);
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .paynow-content{
+        width: 351px;
+        height: 273px;
+        background: #F8F8F8;
+        border-radius: 10px;
+        .current-balance{
+            h4{
+                margin: 13px 0;
+                text-align: center;
+                font-size: 28px;
+                font-weight: 600;
+                font-family: 'Open Sans', sans-serif;
+                color: #333;
+            }
+            h5{
+                margin: 0 0 14px 0;
+                color: #4D4D4D;
+                font-size: 15px;
+                font-weight: 400;
+                font-family: 'Open Sans', sans-serif;
+                text-align: center;
+            }
+        }
+        .buy-more{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            h4{
+                margin: 0 0 4px 0;
+                font-size: 15px;
+                font-weight: 400;
+                font-family: 'Open Sans', sans-serif;
+                color: #4D4D4D;
+            }
+            .value-container{
+                display: flex;
+                align-items: center;
+                column-gap: 7px;
+                margin: 7px 0 0 0;
+                input{
+                    width: 98px;
+                    height: 46px;
+                    background: #FFF;
+                    border: 1px solid #3BCBFF;
+                    border-radius: 4px;
+                    padding: 0 0 0 5px;
+                    margin: 0 0 24px 15px;
+                    &:hover{
+                        box-shadow: 0px 0px 3px #00000014;
+                    }
+                    &:focus{
+                        box-shadow: 0px 0px 3px #00000014;
+                    }
+                }
+                input::-webkit-outer-spin-button,
+                input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+                }
+
+                /* Firefox */
+                input[type=number] {
+                -moz-appearance: textfield;
+                }
+            }
+        }
+        .buy-now-btn{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 0 0 0;
+            .btn-buy{
+                border: none;
+                width: 100px;
+                height: 36px;
+                background: #3BCBFF 0% 0% no-repeat padding-box;
+                color: #111D35;
+                font-size: 15px;
+                font-weight: 600;
+                padding: 0;
+                font-family: 'Open Sans', sans-serif;
+                &:hover{
+                    box-shadow: 0px 0px 11px #3BCBFF63;
+                }
+            }
+        }
+    }
+}

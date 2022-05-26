@@ -1,0 +1,199 @@
+$font-stack:    'Source Sans Pro', sans-serif;
+$primary-color: #111d35;
+$text-color : #ffffff;
+$input-color : #26386F;
+$placeholder-color : #425287;
+$bg-image: url('/assets/images/Group\ 33.jpg');
+
+.alert{
+    position: fixed;
+    background-color: #3BCBFF;
+    padding: 10px;
+    margin: 0;
+    top: 10px;
+    left: 10px;
+    transform: translateX(-500px);
+    transition: 1s ease-in-out;
+    font-size: 15px;
+    font-weight: 400;
+    color: #111D35;
+    &.show{
+        transform: translateX(0px);
+    }
+}
+
+.sign-up-main{
+    font-family: $font-stack;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    color: $text-color;
+    text-align: center;
+
+    .form-part {
+        min-height: 100vh;
+        width: 50vw;
+        background-color: $primary-color;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .form-group {
+            margin: 0 0 5px 0;
+        }
+
+        .form-control{
+            background:none;
+            border: none;
+            background-image: none;
+            width: 344px;
+            height: 42px;
+            border-radius: 3px;
+            border: 1px solid $input-color;
+            color: $text-color;
+
+            &::placeholder{
+                color: #fff!important;
+                font-size: 12px;
+            }
+            
+            &:focus{
+                box-shadow: 0px 0px 6px #006EFF61;
+                border: 1px solid #5E70A8;
+            }
+        }
+
+        .pass-group{
+            position: relative;
+            .eye{
+                position: absolute;
+                right: 12px;
+                top: 17px;
+                height: 9px;
+                width: 11px;
+                opacity: 0.6;
+                z-index: 1;
+            }
+            div{
+                width: 344px;
+            }
+        }
+
+        .checkbox {
+            height: 13px;
+            width: 13px;
+            border: 1px solid;
+            margin: 0;
+            input[type=checkbox] {
+                opacity: 0;
+            }
+            &.checked{
+                background-color: #2196F3;
+            }
+              
+        }
+
+        .btn-primary {
+            color: $primary-color;
+            font-weight: 700;
+            font-size: 12px;
+            background-color: #3bcbff;
+            border-radius: 4px;
+            &.sign-up {
+                width: 133px;
+                height: 36px;
+                
+            }
+            &.login {
+                width: 200px;
+                height: 36px;
+            }
+        }
+
+        .animate-btn-background{
+            border: 1px solid #3BCBFF;
+            &:hover{
+                background-color: transparent!important;
+                color: #FFF!important;
+                box-shadow: 0px 3px 6px #00000030;
+            }
+        }
+        
+    }
+    
+    .image-part {
+        min-height: 100vh;
+        width: 50vw;
+        background-image: $bg-image;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}
+
+@media(max-width: 768px){
+    .form-part{
+        width: 100vw;
+    }
+    .image-part{
+        width: 0vw;
+    }
+}
+
+:focus {
+    outline: none!important;
+    box-shadow: none!important;
+}
+
+:active:focus {
+    outline: none!important;
+    box-shadow: none!important;
+}
+
+.modal.show .modal-dialog {
+    top: 50%;
+    transform: translateY(-85px);
+    left: 0;
+    margin: 0 0 0 13%;
+    height: 155px;
+    width: 421px;
+}
+
+.modal-content {
+    width: 421px !important;
+    left: 0;
+    height: 155px;
+    .animate-bottom-border{
+        position: relative;
+        &::after{
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background-color: #000;
+            left: 0;
+            bottom: 0;
+            transform: scale(0);
+            transition: transform 250ms ease-in-out;
+        }
+
+        &:hover::after{
+            transform: scale(1);
+        }
+    }
+
+    .animate-btn-background{
+        border: 1px solid #3BCBFF;
+        &:hover{
+            background-color: transparent!important;
+            color: #000!important;
+            box-shadow: 0px 3px 6px #00000030;
+        }
+    }
+}
+
+.show {
+    display: block;
+}

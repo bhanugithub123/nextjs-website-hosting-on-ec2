@@ -1,0 +1,30 @@
+<drag-scroll [scrollbar-hidden]="true" style="height: 462px;width:585px;pointer-events: auto;position: relative;">
+    <div id="imageWrapper" style="position: relative;background-color: #000;" [ngStyle]="{'height': mainImageHeight, 'width': mainImageWidth}">
+        <img
+        #img 
+        class="img"
+        [src] ="ImgUrl"
+        (load)="ImageLoaded()"
+        [ngStyle]="{'height': mainImageHeight, 'width': mainImageWidth}"
+        />
+        <svg 
+         id="svg" 
+         [ngStyle]="{'height': canvasheight +'px', 'width': canvaswidth +'px', 'cursor':cursorType}"
+        (mousedown)="Grabbing()"
+        (mouseup)="Grab()"
+        style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);"
+         >
+   
+        </svg>
+        <svg 
+         id="svgSingle" 
+         [ngStyle]="{'height': canvasheight +'px', 'width': canvaswidth +'px', 'cursor':cursorType}"
+        (mousedown)="Grabbing()"
+        (mouseup)="Grab()"
+        style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);"
+         >
+   
+        </svg>
+    </div>
+</drag-scroll>
+

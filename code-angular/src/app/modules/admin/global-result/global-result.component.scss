@@ -1,0 +1,12 @@
+.container-fluid{
+    height: calc(100vh - 70px);
+    background-color: #F0F0F7;
+    padding: 20px;
+    overflow: auto;
+}
+
+.grid-container {
+    display: grid;
+    // grid-template-columns: 630px 420px;
+    grid-template-columns: 0fr 1fr;
+}

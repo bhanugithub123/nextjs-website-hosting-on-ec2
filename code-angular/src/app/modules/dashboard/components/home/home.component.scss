@@ -1,0 +1,127 @@
+$font-stack: 'Source Sans Pro', sans-serif;
+.home {
+    background-color: #FFF;
+    height: calc(100vh - 35px);
+    min-width: 1095px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: absolute;
+    margin-top: 35px;
+    padding: 17px 0 0 20px;
+    .nav-tabs{
+        border-bottom: 1px solid #E9E9F0!important;
+    }
+    .nav-item {
+        font-family: $font-stack;
+        cursor: pointer;
+        .nav-link{
+            color: #9A99AA;
+            padding: 0 0 6px 0;
+            font-size: 15px;
+            font-weight: 500; 
+            width: 90px;
+            border: none!important;
+            outline: none !important;
+            position: relative;
+            .img-active{
+                display: none;
+            }
+            .img-inactive{
+                display: inline-block;
+            }
+            &.active, &:hover{
+                color: #3bcbff;
+                border-bottom: 2px solid!important;
+                background: transparent;
+                .img-active{
+                    display: inline-block;
+                }
+                .img-inactive{
+                    display: none;
+                }
+            }
+        }                
+    }
+}
+.delete-modal{
+    position: fixed;
+    padding: 2rem;
+    background: #FFFFFF;
+    border-radius: 10px;
+    z-index: 12;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 1px 3px 1px rgba(0,0,0,0.4);
+    h4{
+        font-size: 22px;
+        font-family: 'Source Sans Pro', sans-serif;
+        margin: 0;
+    }
+
+    span{
+        font-size: 14px;
+        font-weight: 600;
+        color: #111D35;
+        font-family: 'Source Sans Pro', sans-serif;
+        position: relative;
+        cursor: pointer;
+        &:hover{
+            color: #3BCBFF;
+        }
+    }
+    .btn-primary-Enable{
+        width: 87px;
+        height: 36px;
+        border: 1px solid #3BCBFF;
+        border-radius: 4px;
+        font-size: 14px;
+        color: #111D35;
+        font-weight: 600;
+        &:hover{
+            box-shadow: 0px 3px 6px #0000003B;
+            background: #3BCBFF 0% 0% no-repeat padding-box;
+        }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+    }
+    .btn-primary-discard{
+        width: 87px;
+        height: 36px;
+        background: #3BCBFF 0% 0% no-repeat padding-box;
+        border: 1px solid #3BCBFF;
+        border-radius: 4px;
+        font-size: 14px;
+        color: #111D35;
+        font-weight: 600;
+        margin: 0 0 0 12px;
+        &:hover{
+            box-shadow: 0px 3px 6px #00000030;
+            background-color: transparent;
+        }
+    }
+    .btn:focus{
+        outline: none;
+        box-shadow: none;
+    }
+}
+.btn-delete-primary{
+    position: relative;
+    transition: background-color 250ms ease-in-out;
+    background-color: #3bcbff;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Open Sans', sans-serif;
+    height: 30px;
+    padding: 0;
+    width: 120px;
+    &:hover {
+        border: 1px solid #3bcbff;
+        background-color: #FFF;
+        box-shadow: none;
+    }
+    &:focus{
+        box-shadow: none;
+    }
+}

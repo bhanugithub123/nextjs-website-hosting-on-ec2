@@ -1,0 +1,397 @@
+
+<div class="container-fluid p-0">
+    <!-- navigation --> 
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand">
+        <img [routerLink]="['']" width="72px" src="/assets/images/AI-For-You.png" alt="Ai For You">
+    </a>
+  
+    <div *ngIf="!showUserDetails" class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" (click)="scroll(pricing)">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="scroll(benifits)">Benefits</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" (click)="scroll(contactus)">Contact Us</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/user']">Sign in</a>
+        </li>
+        <li class="nav-item">
+            <button class="btn-link" [routerLink]="['/user/sign-up']">Get Started</button>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="showUserDetails" class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" (click)="scroll(pricing)">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="scroll(benifits)">Benefits</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" (click)="scroll(contactus)">Contact Us</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/home/video']">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled">Hi, {{userName}}</a>
+        </li>
+          <li class="nav-item">
+              <button class="btn-link" (click)="logout()">Logout</button>
+          </li>
+        </ul>
+      </div>
+</nav>
+<!-- hero -->
+<section id="section-2">
+    <!-- <img src="/assets/images/Group 897.png" alt="..."> -->
+    <div class="container col-xxl-8 px-4 py-5">
+        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+          <div class="col-10 col-sm-8 col-lg-6">
+          </div>
+          <div class="col-lg-6">
+            <h1>The Future of AI</h1>
+            <h2>Recognize Everything</h2>
+            <p class="lead">
+                <strong>Ai for you</strong> has pre-trained machine learning models that automatically recognize a vast number of objects, places, and actions in stored and streaming video. Offering exceptional quality out of the box, it’s highly efficient for common use cases and improves over time as new concepts are introduced.
+            </p>
+          </div>
+        </div>
+      </div>
+</section>
+<div class="col-12" style="background-color: rgb(0, 6, 25); padding: 2px;">
+    <div class="container">
+        <div [ngClass]="{'play': playVideo}" class="wrapper d-flex justify-content-center">
+            <img id="video-cover" style="height: auto;max-width: 1130px;width: 100%;" src="/assets/images/thumbnail.png" alt="Video title">
+            <img (click)="playvideo()" class="img" src="/assets/icons/Path 249.svg" alt="play">
+            <iframe id="player" src="https://www.youtube.com/embed/_evIUhnaWIs" allow="autoplay; encrypted-media"  width="1130px" height="auto" frameborder="0"></iframe>
+        </div>
+    </div>
+</div>
+<!-- pricing -->
+<section id="section-3" #pricing>
+    <div>
+        <h3>Pricing and Features</h3>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <img src="/assets/images/Group 881.png" alt="Label detection">
+                <h4>Label Detection</h4>
+            </div>
+            <div class="col">
+                <img src="/assets/images/Group 882.png" alt="Shot Detection">
+                <h4>Shot Detection</h4>
+            </div>
+            <div class="col">
+                <img src="/assets/images/Group 883.png" alt="Explicit Content Detection">
+                <h4>Explicit Content Detection</h4>
+            </div>
+            <div class="col">
+                <img src="/assets/images/Group 884.png" alt="Speech Transcription">
+                <h4>Speech Transcription</h4>
+            </div>
+            <div class="col">
+                <img src="/assets/images/Group 885.png" alt="Object Tracking">
+                <h4>Object Detection</h4>
+            </div>
+            <div class="col">
+                <img src="/assets/images/Group 886.png" alt="Text Detection">
+                <h4>Text Detection</h4>
+            </div>
+            <div class="col">
+                <img src="/assets/images/Group 887.png" alt="Logo Detection">
+                <h4>Logo Detection</h4>
+            </div>
+            <div class="col">
+                <img src="/assets/images/Group 888.png" alt="Face Detection">
+                <h4>Face Detection</h4>
+            </div>
+            <div class="col">
+                <img src="/assets/images/Group 889.png" alt="Person Detection">
+                <h4>Person Detection</h4>
+            </div>            
+        </div>
+    </div>
+</section>
+<!-- benefits -->
+<section #benifits id="section-4">
+    <div>
+        <h3>Benefits</h3>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-6 col-md-4">
+                <div class="card" >
+                    <img src="/assets/images/Group 891.png" class="card-img-top" alt="Benefits">
+                    <div class="card-body">
+                        <h5>State-of-the-art Media Detection</h5>
+                        <p>
+                            AI for you adds intelligent, user-friendly, and accessible ‘eyes’ to your business without investing in programming and machine learning expertise. The tool provides low-friction, powerful media recognition to make your computer’s vision smarter without coding.
+                        </p>
+                    </div>
+                </div> 
+            </div>   
+            <div class="col-6 col-md-4">
+                <div class="card">
+                    <img src="/assets/images/Group 892.png" class="card-img-top" alt="benefit2">
+                    <div class="card-body">
+                        <h5>Enhance User Experience and Improve Productivity</h5>
+                        <p>
+                            AI for you provides an innate UI to improve the user experience which makes it suitable for all types of business line-ups. When used in combination with other apps and programs, your enterprise can be transformed into a unified powerful platform that is optimized to increase productivity and identify defects.
+                        </p>
+                    </div>
+                </div> 
+            </div>
+           <div class="col-6 col-md-4">
+            <div class="card">
+                <img src="/assets/images/Group 893.png" class="card-img-top" alt="benefit 3">
+                <div class="card-body">
+                    <h5>Automate Tedious Visual Analysis</h5>
+                    <p>
+                        With AI for you, you can manage to visually analyse a surfeit of images and videos quickly and accurately which not only saves time but resources and capital as well. The automation of complex media analysis improves workforce arrangement and minimizes errors.
+                    </p>
+                </div>
+            </div> 
+           </div>      
+            <div class="col-6 col-md-4">
+                <div class="card">
+                    <img src="/assets/images/Group 894.png" class="card-img-top" alt="benefit 4">
+                    <div class="card-body">
+                        <h5>Easily accessible</h5>
+                        <p>
+                            The flexibility and accessibility of AI for you makes it usable at a wide range of potential locations. Right from offices to fields, users can monitor, and inspect complex visual analysis carried out smoothly via artificial intelligence and machine learning algorithms.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4">
+                <div class="card">
+                    <img src="/assets/images/Group 895.png" class="card-img-top" alt="benefit 4">
+                    <div class="card-body">
+                        <h5>Get Started without Expertise</h5>
+                        <p>
+                            AI for you is designed to help discrete line-ups of businesses that might not have expertise and familiarity with machine learning. With the interactive pre-trained vision, you can process a wide range of images and videos within minutes without any prior knowledge of AI or ML algorithms.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4">
+                <div class="card">
+                    <img src="/assets/images/Group 896.png" class="card-img-top" alt="benefit 4">
+                    <div class="card-body">
+                        <h5>Adopt, Adapt and Innovate</h5>
+                        <p>
+                            Step into the world of innovation by relying upon AI that allows users to adopt and adapt to new technologies. AI for you can be customized to work as per your needs so that you can make the best out of it. Right from saving money to the improved allocation of resources, AI for you can streamline your business in numerous ways
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- contact us  -->
+<section #contactus id="section-5">
+    <div>
+        <h3>Contact us</h3>
+    </div>
+    <div class="container">
+        <form [formGroup]="contactForm" (ngSubmit)="onSend()">
+            <div class="row form-group">
+                <div class="col-12 col-md-6">
+                    <label  
+                    class="form-label"
+                    >First Name
+                    </label>
+                    <input 
+                    type="text" 
+                    class="form-control" 
+                    formControlName="fname"
+                    [ngClass]="submitted && contactForm!.invalid ?'is-invalid': ''"
+                    required
+                    >
+                    <div *ngIf="fname!.invalid && submitted" class="invalid-feedback">
+                        <small *ngIf="fname!.errors!.required">Please Enter First Name</small>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label  
+                    class="form-label"
+                    >Last Name
+                    </label>
+                    <input 
+                    type="text" 
+                    class="form-control" 
+                    formControlName="lname"
+                    [ngClass]="submitted && contactForm!.invalid ?'is-invalid': ''"
+                    required
+                    >
+                    <div *ngIf="lname!.invalid && submitted" class="invalid-feedback">
+                        <small *ngIf="lname!.errors!.required">Please Enter Last Name</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-12 col-md-6">
+                    <label  
+                    class="form-label"
+                    >Country
+                    </label>
+                    <select 
+                    #formselect1
+                    class="form-select"
+                    id="formselect1"
+                    formControlName="country"
+                    (change)="onCountryChange($event)"
+                    >
+                        <option selected disabled value=""
+                        >Choose Country</option>
+                    </select>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label  
+                    class="form-label"
+                    >E-mail
+                    </label>
+                    <input 
+                    type="email" 
+                    class="form-control" 
+                    formControlName="email"
+                    [ngClass]="submitted && contactForm!.invalid ?'is-invalid': ''"
+                    required
+                    >
+                    <div *ngIf="email!.invalid && submitted" class="invalid-feedback">
+                        <small *ngIf="email!.errors!.required">Please Enter Email</small>
+                        <small *ngIf="email!.errors!.email">Please Enter A Valid Email</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-12 col-md-6">
+                    <label  
+                    class="form-label"
+                    >Subject
+                    </label>
+                    <input 
+                    type="text" 
+                    class="form-control" 
+                    formControlName="subject"
+                    >
+                </div>
+                <div class="col-12 col-md-6">
+                    <label  
+                    class="form-label"
+                    >Contact Number
+                    </label>
+                    <div class="d-flex align-items-start">
+                        <select 
+                        #formselect2
+                        class="form-select"
+                        id="formselect2"
+                        (change)="onCodeChange($event)"
+                        formControlName="code"
+                        >
+                            <option selected disabled value=""
+                            >C. Code</option>
+                        </select>
+                        <div style="flex-basis: 100%;">
+                            <input 
+                            type="number" 
+                            (wheel)="PreventDefault($event)"
+                            (keypress)="PreventChars($event)"
+                            class="form-control" 
+                            formControlName="phone"
+                            [ngClass]="submitted && contactForm!.invalid ?'is-invalid': ''"
+                            required
+                            >
+                            <div *ngIf="phone!.invalid && submitted" class="invalid-feedback">
+                                <small *ngIf="phone!.errors!.required">Please Enter Phone</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-12">
+                    <label
+                    class="form-label"
+                    >
+                    Message
+                    </label>
+                    <textarea 
+                    class="form-control text-message" 
+                    formControlName="message"
+                    rows="3"
+                    [ngClass]="submitted && contactForm!.invalid ?'is-invalid': ''"
+                    required></textarea>
+                    <div *ngIf="message!.invalid && submitted" class="invalid-feedback">
+                        <small *ngIf="message!.errors!.required">Please Enter Message</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-12 text-center" style="display: flex;flex-direction: column;row-gap: 5px;">
+                    <button type="submit" class="btn btn-send">Send</button>
+                    <small style="color:#FFF;">{{msg}}</small>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<div class="container-fluid">
+    <div class="container py-3">
+        <div class="row d-flex justify-content-center">
+            <div class="col-12 col-md-5 d-flex align-items-center justify-content-center">
+                <img style="width: 28px;height: auto;margin: 0 25px 0 0;" src="/assets/icons/email.svg" alt="email">
+                <h5>support@hypercap.ai</h5>
+            </div>
+            <div class="col-12 col-md-5 d-flex align-items-center justify-content-center">
+                <img style="width: 28px;height: auto;margin: 0 25px 0 0;" src="/assets/icons/email.svg" alt="email">
+                <h5>sales@hypercap.ai</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- footer widget -->
+<footer id="section-6">
+    <h4>Follow us</h4>
+    <div>
+        <img src="/assets/icons/Icon awesome-facebook-f.svg" alt="facebook">
+        <img src="/assets/icons/Icon awesome-twitter.svg" alt="twitter">
+        <img src="/assets/icons/Icon awesome-linkedin-in.svg" alt="linkedin">
+        <img src="/assets/icons/Icon awesome-youtube.svg" alt="youtube">
+    </div>
+</footer>
+</div>
+
+<!-- footer  -->
+<footer class="footer">
+    <a class="terms" href="/terms-of-service" target="_blank" >Terms of service</a>
+    <span style="margin: 0 5px; color: #FFF;" >&#124;</span>
+    <a class="terms" href="/privacy-policy"  target="_blank">Privacy Policy</a>
+    <span style="margin: 0 5px;color: #FFF;">&#124;</span>
+    <a class="terms" href="/transactional-currency"  target="_blank">Transactional Currency</a>
+    <span style="margin: 0 5px;color: #FFF;">&#124;</span>
+    <a class="terms" href="/shipping-policy"  target="_blank">Shipping Policy</a>
+    <span style="margin: 0 5px;color: #FFF;">&#124;</span>
+    <a class="terms" href="/cancellation-policy"  target="_blank">Cancellation Policy</a>
+    <span style="margin: 0 5px;color: #FFF;">&#124;</span>
+    <a class="terms" href="/return-policy"  target="_blank">Return Policy</a>
+    <span style="margin: 0 5px;color: #FFF;">&#124;</span>
+    <a class="terms" href="/refund-policy"  target="_blank">Refund Policy</a>
+    <span style="margin: 0 5px;color: #FFF;">&#124;</span>
+    <a class="terms" href="https://www.innovsoltech.com/jurisdiction-clause.php" target="_blank">Regulation Laws and Jurisdiction</a>
+    <span style="margin: 0 5px;color: #FFF;">&#124;</span>
+    <a class="terms" href="https://www.innovsoltech.com/about.php" target="_blank">About Us</a>
+    <span style="margin: 0 5px;color: #FFF;">&#124;</span>
+    <a class="terms" href="https://www.innovsoltech.com/contact.php" target="_blank">Contact Us</a>
+</footer>

@@ -1,0 +1,150 @@
+#zoom-in {
+    width: 30px;
+    height: 35px;
+    background: black;
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+#zoom-out {
+    width: 30px;
+    height: 35px;
+    background: black;
+    position: absolute;
+    left: 0;
+    top: 35px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+#delete {
+    width: 30px;
+    height: 35px;
+    background: black;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.main-image {
+    overflow-y: auto;
+    // height: 462px;
+    width: 601px !important;
+    overflow-x: hidden;
+    height: calc(100vh - 100px);
+    &.col {
+        max-width: 585px!important;
+        padding: 0 0px 0 10px;
+    }
+    .wrapper {
+        width: 585px;
+        height: 462px;
+        background: transparent;
+        position: relative;
+        .loader{
+            position: absolute;
+            z-index: 1;
+            position: absolute;
+            width: 100%;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.4);
+        }
+    }
+    
+}
+
+.image-details {
+    height: 462px;
+    width: 100%;
+}
+
+// media queries
+@media (min-width : 1524px){
+    .main-image{
+        height: calc(100vh - 130px);
+    }
+}
+
+@media (max-width: 1288px){
+    .main-image{
+        height: calc(100vh - 100px);
+    }
+}
+.delete-modal{
+    position: fixed;
+    width: 460px;
+    height: 150px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    z-index: 12;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 1px 3px 1px rgba(0,0,0,0.4);
+    h4{
+        font-size: 22px;
+        font-family: 'Source Sans Pro', sans-serif;
+        margin: 0;
+    }
+
+    span{
+        font-size: 14px;
+        font-weight: 600;
+        color: #111D35;
+        font-family: 'Source Sans Pro', sans-serif;
+        position: relative;
+        cursor: pointer;
+        &:hover{
+            color: #3BCBFF;
+        }
+    }
+    .btn-primary-Enable{
+        width: 87px;
+        height: 36px;
+        border: 1px solid #3BCBFF;
+        border-radius: 4px;
+        font-size: 14px;
+        color: #111D35;
+        font-weight: 600;
+        &:hover{
+            box-shadow: 0px 3px 6px #0000003B;
+            background: #3BCBFF 0% 0% no-repeat padding-box;
+        }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+    }
+    .btn-primary-discard{
+        width: 87px;
+        height: 36px;
+        background: #3BCBFF 0% 0% no-repeat padding-box;
+        border: 1px solid #3BCBFF;
+        border-radius: 4px;
+        font-size: 14px;
+        color: #111D35;
+        font-weight: 600;
+        margin: 0 0 0 12px;
+        &:hover{
+            box-shadow: 0px 3px 6px #00000030;
+            background-color: transparent;
+        }
+    }
+    .btn:focus{
+        outline: none;
+        box-shadow: none;
+    }
+}

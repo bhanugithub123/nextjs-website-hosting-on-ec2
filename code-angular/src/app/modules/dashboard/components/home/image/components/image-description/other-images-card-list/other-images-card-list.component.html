@@ -1,0 +1,20 @@
+<div *ngIf="loadSpinner" style="width: 215px;margin: 10px 0 0 0;" class="d-flex align-items-center">
+    <strong>Loading Gallery ...</strong>
+    <div class="spinner-border spinner-border-sm ml-auto" role="status" aria-hidden="true"></div>
+</div>
+<div *ngIf="!loadSpinner">
+    <drag-scroll #nav [drag-scroll-y-disabled]="true" style="max-height: 120px; pointer-events: auto;max-width: 585px;margin: 20px 0 0 0;overflow-x: hidden;">
+        <li drag-scroll-item *ngFor="let img of otherImage" style="margin: 0 3px 0 0;" [ngClass]="{'active': img.current}">
+            <ng-container>
+                <other-image-card 
+                [imageData]="img"
+                (imageInfo)="OpenImage($event, img.isSample)"
+                >
+                </other-image-card>
+            </ng-container>   
+        </li>
+    </drag-scroll>
+</div>
+<div *ngIf="!loadSpinner" class="d-flex align-items-center justify-content-end" style="width: 588px;margin: 0 0 15px 0;">
+    <small style="margin: 0 5px 0 0;color: #B1B1B1;font-size: 12px;font-family: 'Source Sans Pro', sans-serif;">Total {{ imageCount }} Images</small>   
+</div>

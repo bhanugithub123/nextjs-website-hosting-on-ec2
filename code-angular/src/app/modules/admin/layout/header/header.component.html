@@ -1,0 +1,31 @@
+<div class="d-flex align-items-center justify-content-between" style="background-color: #FFF;height: 70px;box-shadow: 0px 2px 6px #0000000A;">
+    <div class="d-flex align-items-center" style="padding-left: 20px;position: relative;">
+        <img style="position: absolute;left: 25px;" *ngIf="showSearchInput" src="../../../../../assets/icons/Search Icon.svg" alt="search">
+        <input *ngIf="showSearchInput" type="text" name="search" class="form-control" placeholder="Search" autocomplete="off" (input)="onSearchInput($event)">
+    </div>
+    <div class="d-flex align-items-center" style="padding: 0 37px 0 0;">
+        <div style="position: relative;">
+            <button class="btn-primary-username" (click)="ToggleMenu()">
+                {{ userName }}
+                <img style="margin-left: 5px;" src="../../../../../assets/icons/Path 26.svg" alt="dropdown">
+            </button>
+            <div *ngIf="showModals" class="dropdown-modal-logout">
+                <a class="dropdown-item" (click)="logout()">
+                    <span style="padding-right: 28px;">
+                        <img src="../../../../../assets/icons/Icon open-account-logout.svg" alt="Logout">
+                    </span>Logout
+                </a>
+            </div>
+        </div>
+        <div class="profile-img">
+
+        </div>
+    </div>
+</div>
+
+<!-- drop down toggle close window -->
+<div *ngIf="showModals" class="dropdown-modal-close" [ngStyle]="{'min-width': minWidth}" (click)="ToggleMenu()">
+    <div>
+
+    </div>
+</div>

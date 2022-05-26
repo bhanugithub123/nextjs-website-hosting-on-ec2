@@ -1,0 +1,62 @@
+$font-stack: 'Open Sans', sans-serif;
+$blue-color: #508FF4;
+$green: #1BC167;
+$red: #F45050;
+$orange: #F48C50;
+$yellow: #F4CE50;
+
+.image-container{
+    width: 615px;
+    min-height: 190px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px #0000004D;
+    border-radius: 3px;
+    padding: 6px 50px 0 16px;
+    margin: 0 0 25px 0;
+    h3{
+        font-family: $font-stack;
+        font-weight: 600;
+        font-size: 15px;
+        margin: 0 0 11px 0;
+    }
+    h5{
+        color: #717171;
+        font-family: $font-stack;
+        font-weight: 600;
+        font-size: 14px;
+        margin: 0 0 11px 0;
+        width: 144px;
+    }
+    h6{
+        color: #474747;
+        font-family: $font-stack;
+        font-weight: 400;
+        font-size: 12px;
+        margin: 0 0 11px 0;
+    }
+    .progress{
+        width: 309px;
+        height: 5px;
+        background: #D8D8D8;
+        border-radius: 31px;
+        margin: 0 0 11px 0;
+        .progress-bar{
+            border-radius: 31px;
+        }
+        .bg-blue{
+            background-color: $blue-color;
+        }
+        .bg-green{
+            background-color: $green;
+        }
+        .bg-red{
+            background-color: $red;
+        }
+        .bg-orange{
+            background-color: $orange;
+        }
+        .bg-yellow{
+            background-color: $yellow;
+        }
+    }
+}

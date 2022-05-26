@@ -1,0 +1,16 @@
+.file-container{
+    display: grid;
+    grid-template-columns: auto 290px auto;
+    justify-items: center;
+    align-items: center;
+    h6{
+        color:white;
+        font-size:14px;
+        width: 250px;
+        word-break: break-all; 
+        margin: 0;
+        text-align: left;
+        font-size: 12px;
+        font-weight: 600;
+    }
+}

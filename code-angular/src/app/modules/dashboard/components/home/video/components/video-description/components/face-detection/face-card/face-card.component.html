@@ -1,0 +1,23 @@
+<div class="card-container">
+    <div>
+        <ng-content ></ng-content>        
+    </div>
+    <div class="main-content">
+        <h5 style="height: 28px; margin: 0;color: #0D76FF;font-size: 13px;font-weight: 400;font-family: 'Open Sans', sans-serif;">Confidence: {{ confidence }}, Time: {{time}}</h5>
+        <div class="progress timestamps">
+            <ng-container *ngFor="let t of Data;let i = index;">
+                <div [ngStyle]="{'width': t.time_gap+'%'}" style="background-color: #D6D6D6;" class="progress-bar"></div>
+                <div 
+                 class="progress-bar" 
+                 (click)="Toggle(t.time)"
+                 [ngClass]="{ 'bg-red': t.confidence_value < 20 ? true : false, 'bg-orange': t.confidence_value < 40 && t.confidence_value >= 20 ? true : false, 'bg-yellow': t.confidence_value < 60 && t.confidence_value >= 40 ? true : false, 'bg-green': t.confidence_value < 80 && t.confidence_value >= 60 ? true : false, 'bg-blue': t.confidence_value >= 80 ? true : false}"
+                 *ngIf="t.confidence != '0%'? true: false"
+                 (mouseenter)="ToggleValue(t.confidence,t.time)" 
+                 [ngStyle]="{'width': t.time_diff+'%'}" 
+                 style="background-color: #0D76FF;cursor: pointer;border: 0px solid #D6D6D6;border-radius: 10px;"
+                 >
+                </div>
+            </ng-container>
+          </div>
+    </div>
+</div>

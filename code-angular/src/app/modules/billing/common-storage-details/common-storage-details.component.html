@@ -1,0 +1,21 @@
+<div class="d-flex align-items-center">
+    <div class="progressbar center">
+        <div class="half-circle" #circle1></div>
+        <div class="half-circle" #circle2></div>
+        <div class="half-circle-top" #halfCircleTop></div> 
+        <div class="progressbar-circle center d-flex flex-column justify-content-center">
+            <span>
+                {{percentage_used}}
+            </span>
+            <span style="font-size: 10px;font-weight: 400;">used</span>
+        </div>
+    </div>
+    <div class="storage-details">
+        <h5>{{used_space}}</h5>
+        <h6>of {{available_space}} GB</h6>
+        <p><strong>Note:-</strong> 10 GBs are freely initiated to your account but can be only used after adding a balance</p>
+    </div>
+    <div class="modal-progress-wrapper">
+        <storage-details-modal></storage-details-modal>
+    </div>
+</div>

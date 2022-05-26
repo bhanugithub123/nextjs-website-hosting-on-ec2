@@ -1,0 +1,18 @@
+<div class="conatiner-fluid bg-grey d-flex flex-column align-items-center justify-content-center " style="height: 100vh;">
+    <div class="content">
+        <div class="logo">
+            <img style="cursor: pointer;" [routerLink]="['']" width="80px" height="65px" src="/assets/images/AI-For-You.png" alt="ai for you">
+        </div>
+        <div class="status">
+            <img *ngIf="status === 'true' ? true : false" src="/assets/icons/Path 441.svg" alt="success">
+            <img *ngIf="status === 'false' ? true : false" src="/assets/icons/Path 442.svg" alt="failed">
+        </div>
+        <div class="details">
+            <h2 *ngIf="status === 'true' ? true : false">User Verification Successfully</h2>
+            <h2 *ngIf="status === 'false' ? true : false">User Verification Unsuccessfully</h2>
+        </div>
+        <div class="route-btn">
+            <button [routerLink]="['/user']" >Go to login</button>
+        </div>
+    </div>
+</div>

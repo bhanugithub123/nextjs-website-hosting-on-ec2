@@ -1,0 +1,26 @@
+.show-more {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    button{
+        border: none;
+        font-size: 14px;
+        font-weight: 600;
+        width: 90px;
+        height: 32px;
+        background: #3BCBFF;
+        border-radius: 4px;
+        color: #111D35;
+        position: relative;
+        transition: background-color 250ms ease-in-out;
+        &:hover,
+        &:focus {
+            border: 1px solid #3bcbff;
+            background-color: #FFF;
+            box-shadow: none;
+        }
+    }  
+
+}

@@ -1,0 +1,47 @@
+<div #home class="container-fluid home" [ngStyle]="{'overflow-y': overflow}">
+  <div style="position: absolute;left: 240px;top: 14px;">
+    <button *ngIf="showSelectAllBtn" (click)="HandleSelectAll();" class="btn btn-delete-primary">Select All</button>
+  </div>
+  <div style="position: absolute;left: 380px;top: 14px;">
+    <button *ngIf="showBtn" (click)="HandleUnselectAll();" class="btn btn-delete-primary">Unselect All</button>
+  </div>
+  <div *ngIf="showBtn" style="position: absolute;left: 520px;top: 14px;">
+    <button (click)="ToggleDeleteModal();" class="btn btn-delete-primary">Delete Selected</button>
+  </div>
+  <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a
+          class="nav-link video-link"  
+          routerLink="./video" 
+          [ngClass]="{'active':currentComponentVideo}"
+          >
+          <img style="padding-bottom: 3px;" class="img-active" src="/assets/icons/Icon awesome-video.svg" alt="Video">
+          <img style="padding-bottom: 3px;" class="img-inactive" src="/assets/icons/Icon awesome-video alt.svg" alt="Video"> Video</a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link image-link" 
+          routerLink="./image" 
+          [ngClass]="{'active':!currentComponentVideo}"
+          
+          >
+          <img style="padding-bottom: 3px;" class="img-inactive" src="/assets/icons/Icon ionic-md-image.svg" alt="Image">
+          <img style="padding-bottom: 3px;" class="img-active" src="/assets/icons/Icon ionic-md-image alt.svg" alt="Image"> Image</a>
+      </li>
+  </ul>
+  <router-outlet></router-outlet>    
+</div>
+
+<!-- delete modal -->
+<div *ngIf="showDeleteModal" class="delete-modal">
+  <div style="display: flex;flex-direction: column;align-items: center;">
+      <h4>Are you sure you want to delete Selected {{ file_type }}?</h4>
+      <div class="d-flex justify-content-center" style="margin: 32px 0 0 0;">
+          <button (click)="DeleteFile()" class="btn btn-primary-Enable">Yes
+              <div *ngIf="deleting" class="spinner-border" role="status" style="width: 12px;height: 12px;margin: 0 0 2px 0;">
+              </div>
+          </button>
+          <button (click)="ToggleDeleteModal()" class="btn btn-primary-discard">No</button>
+      </div>
+  </div>
+</div>

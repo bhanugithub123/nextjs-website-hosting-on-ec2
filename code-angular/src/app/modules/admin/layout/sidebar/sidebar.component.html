@@ -1,0 +1,62 @@
+<ng-sidebar-container style="overflow: hidden;">
+ 
+  <!-- A sidebar -->
+  <ng-sidebar [(opened)]="_opened" style="height: 100vh;display: block;">
+    <div *ngIf="hamMenu" style="position: fixed;left: 260px;width: 40px;height: 100vh;display: block;background-color: #111d35;">
+      <span (click)="ToggleSidebar()" class="hamburger-menu"></span>
+    </div>
+    <div style="background-color: #111d35;height: 100%; width: 260px;color: white;">
+        <div class="container text-center pt-3 ">
+          <img (click)="RouteToHome()" width="80px" height="65px" width="80px" height="65px" src="/assets/images/AI-For-You.png" alt="Ai for You" style="cursor: pointer;">
+        </div>
+        <div 
+          class="container menu"
+          [routerLink]="['/admin']"
+          (click)="RouteChangedToGlobal()"
+          [ngClass]="{'active': globalActive}"
+          >
+          <div [ngClass]="{'active': globalActive}" class="border"></div>
+          <div>
+            <span style="height: 30px;padding-right: 10px;">
+              <img *ngIf="globalActive" src="/assets/icons/Path 388.svg" alt="global result">
+              <img *ngIf="!globalActive" src="/assets/icons/Path 388 (1).svg" alt="global result">
+            </span>
+            <span style="font-size: 15px;">
+              Global Result
+            </span>
+          </div>
+        </div>
+        <div 
+          class="container menu"
+          style="margin: 0;"
+          [routerLink]="['/admin/user-details']"
+          (click)="RouteChangedToUsers()"
+          [ngClass]="{'active': usersActive}"
+          >
+            <div [ngClass]="{'active': usersActive}" class="border"></div>
+            <div>
+              <span style="height: 30px;padding-right: 10px;">
+                <img *ngIf="usersActive" src="/assets/icons/Path 390.svg" alt="user details">
+                <img *ngIf="!usersActive" src="/assets/icons/Path 390 (1).svg" alt="user details">
+              </span>
+              <span style="font-size: 15px;">
+                User Details
+              </span>
+            </div>
+        </div>
+    </div>
+  </ng-sidebar>
+
+  <!-- Page content -->
+  <div ng-sidebar-content>
+    <div style="min-width: 1095px;display: flex;align-items: flex-start;justify-content: flex-start;">
+      <div (click)="ToggleSidebar()" *ngIf="hamMenu" style="width: 40px;height: 100vh;display: block;background-color: #111d35;">
+        <span class="hamburger-menu"></span>
+      </div>
+      <div [ngStyle]="{'width': appHolderWidth}">
+        <admin-header style="position: relative;"></admin-header>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+  </ng-sidebar-container>

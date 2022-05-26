@@ -1,0 +1,100 @@
+/* You can add global styles to this file, and also import other style files */
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
+
+@media(max-width: 768px) {
+    .form-part {
+		height: 100vw!important;
+        width: 100vh!important;
+    }
+    .image-part{
+        width: 0!important;
+    }
+}
+
+//main image css
+.main {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 585px;
+    height: 462px;
+	object-fit: cover;
+	position: relative;
+}
+
+
+// scroll bar css
+::-webkit-scrollbar-track
+{
+	box-shadow: none!important;
+	border-radius: 4px!important;
+	background-color: #EEEEEE;
+}
+
+::-webkit-scrollbar
+{
+	width: 5px;
+    height: 5px;
+	background-color: #EEEEEE;
+}
+
+::-webkit-scrollbar-thumb
+{
+	border-radius: 4px;
+	box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color:#3BCBFF;
+}
+*{
+    scrollbar-color: #3BCBFF aliceblue;
+    scrollbar-width: thin;
+}
+
+@media(min-width: 768px) {
+	.container {
+		max-width: 100%;
+	}
+}
+
+@media(min-width: 576px) {
+	.container {
+		max-width: 100%;
+	}
+}
+
+.eye {
+	cursor: pointer;
+}
+
+.time {
+    font-family: "Open Sans", sans-serif;
+    width: 61px;
+    height: 21px;
+    background: #111D35 0% 0% no-repeat padding-box;
+    border-radius: 50px;
+    color: #FFF9F9;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px;
+    margin-right: 24px;
+    cursor:pointer;
+}
+
+.drag-scroll-content{
+	overflow: hidden!important;
+}
+
+.ng-sidebar__content{
+	overflow-y: hidden!important;
+	overflow-x: auto!important;
+	margin: 0 0 0 260px!important;
+}
+
+@media (max-width: 989px){
+    .ng-sidebar__content{
+        transform: translateX(-260px)!important;
+        width: 100%!important;
+    }
+}

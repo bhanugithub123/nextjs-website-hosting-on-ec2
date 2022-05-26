@@ -1,0 +1,22 @@
+<div *ngIf="showSpinner" class="text-center mt-2">
+    <button class="btn btn-primary" style="background-color: #3BCBFF;border: none;color: #111D35;">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Loading Videos...
+    </button>
+</div>
+<ng-container *ngIf="!showSpinner">
+    <div *ngFor="let info of videos; let i = index;" class="container-fluid pt-4 pb-3">
+        <app-title>
+            <div style="font-size: 16px;font-family: 'Open Sans', sans-serif;font-weight: 600;color:#8B8AA8;">{{info.date}}</div>
+            <small style="font-size: 14px;font-family: 'Open Sans', sans-serif;font-weight: 600;color:#77769E;">Total {{info.count}} videos</small>
+        </app-title>
+        <deleted-videos-cards
+         [videoInfo]="info.videos"
+         [showmore]="!info.showmore"
+         ></deleted-videos-cards>
+         <div class="show-more">
+            <button (click)="toggleShow(i)" *ngIf="info.showmore">Load More</button>
+            <button (click)="toggleShow(i)" *ngIf="info.showless">Load Less</button>
+        </div>
+    </div>
+</ng-container>

@@ -1,0 +1,17 @@
+.alert{
+    position: fixed;
+    background-color: #3BCBFF;
+    padding: 10px;
+    margin: 0;
+    top: 10px;
+    left: 10px;
+    transform: translateX(-1000px);
+    transition: 1s ease-in-out;
+    font-size: 15px;
+    font-weight: 400;
+    color: #111D35;
+    z-index: 1600;
+    &.show{
+        transform: translateX(0px);
+    }
+}

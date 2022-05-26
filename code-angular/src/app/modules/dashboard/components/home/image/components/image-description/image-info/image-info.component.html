@@ -1,0 +1,451 @@
+<div class="image-details">
+    <div>
+        <div *ngIf="loadSpinner" style="width: 215px;margin: 10px 0 0 0;" class="d-flex align-items-center">
+            <strong>Loading Image response ...</strong>
+            <div class="spinner-border spinner-border-sm ml-auto" role="status" aria-hidden="true"></div>
+        </div>
+        <div>
+            <div class="mb-4" style="word-break: break-all;">
+                <h4 style="font-size: 22px;font-weight: 600; margin: 0;">Image Name</h4>
+                <small style="font-size: 16px;font-weight: 500;margin: 0;">{{ currentImageName }}</small>
+            </div>
+            <div *ngIf="!loadSpinner" class="mb-4">
+                <h4 style="font-size: 22px;font-weight: 600; margin: 0;">Format</h4>
+                <small style="font-size: 16px;font-weight: 500;margin: 0;">.{{ currentImageFormat }}</small>
+            </div>
+        </div>
+        <!-- feature -->
+        <div class="no-scroll" style="height: 500px; min-width: 455px;max-width: 95%;">
+            <div *ngIf="!loadSpinner" style="padding: 0 0 5px 0;width: 100%;">
+                <div class="mb-4" *ngFor="let feature of available_Features" class="features-wrapper">
+                    <div *ngIf="feature.processing" class="spinner-wrapper">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center features" (click)="showFeature(feature.label)" [ngClass]="{'active': feature.switch}">
+                        <h4 class="title">{{ feature.label }}</h4>
+                        <small style="margin: 0 0 0 20px;font-size: 12px;">{{ feature.count }}</small>
+                        <img style="position: absolute;right: 23px;" *ngIf="feature.switch" src="../../../../../../../../../assets/icons/Line 76.svg" alt="accordian">
+                        <img style="position: absolute;right: 18px;" *ngIf="!feature.switch" src="../../../../../../../../../assets/icons/+.svg" alt="accordian">
+                    </div>
+                    <!-- web entities -->
+                    <div *ngIf="feature.label === 'Web Detection'? true:false" [ngClass]="{'show': feature.switch}" class="collapse-div" id="Web">
+                        <div class="article">
+                            <div style="padding: 5px;margin: 5px;"><span style="font-size: 13px;font-weight: 600;font-family: 'Source Sans Pro', san-serif;">Best Guess Label: </span> <small style="color: #9E9E9E;">{{ bestGuessLabel }}</small></div>
+                            <div class="web-detect" *ngIf="feature.count > 0? true:false;">                
+                                <span *ngFor="let d of webDetects;let i = index;" [ngClass]="{'active': d.active}" (mouseenter)="ToggleWebLabel(i)" >
+                                    <ng-container *ngIf="d.label">
+                                        {{ d.label }}
+                                    </ng-container>
+                                </span>
+                            </div>
+                            <div style="margin: 5px;padding: 5px;" *ngIf="feature.count > 0 ? true:false;">
+                                <h3 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 4px 0;">Confidence</h3>
+                                <div class="d-flex align-items-center justify-content-start">
+                                    <div class="progress">
+                                        <div class="progress-bar" [ngStyle]="{'width': currentConfidence}"></div>
+                                    </div>
+                                    <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 0 5px;">{{currentConfidence}}</h6>
+                                </div>
+                            </div>
+                            <!-- indentical urls  -->
+                            <div style="padding: 5px;margin: 5px;" *ngIf="feature.count > 0 ? true:false;">
+                                <h6 style="margin: 15px 0 10px 0;font-size: 14px;font-weight: 600;">Pages with identical images:</h6>
+                                <div class="no-scroll" *ngIf="identicalUrls.length > 0 ? true: false" style="max-height: 120px;overflow-y: auto;">
+                                    <div class="d-flex flex-wrap align-items-center" style="width: 350px;margin: 10px 0;">
+                                        <a
+                                        *ngFor="let link of identicalUrls;let i = index;"
+                                        class="urls"
+                                        [href]="link" 
+                                        target="_blank"
+                                        data-toggle="tooltip" 
+                                        [title]="link"
+                                        (click)="openImage($event)"
+                                        >
+                                            <span>Image {{ i+1 }}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div *ngIf="identicalUrls.length > 0 ? false: true"> 
+                                    <h3 style="font-size: 12px;font-weight: 400;color: #6B6B6B;text-align: center;">No Matching Link Found.</h3>
+                                </div>
+                            </div>
+                            <!-- page urls -->
+                            <div style="padding: 5px;margin: 5px;" *ngIf="feature.count > 0 ? true:false;">
+                                <h6 style="margin: 15px 0 10px 0;font-size: 14px;font-weight: 600;">Pages with matching images:</h6>
+                                <div class="no-scroll" *ngIf="PageUrls.length > 0 ? true: false" style="max-height: 120px;overflow-y: auto;">
+                                    <div class="d-flex flex-wrap align-items-center" style="width: 350px;">
+                                        <a
+                                        *ngFor="let link of PageUrls;let i = index;"
+                                        class="urls"
+                                        [href]="link" 
+                                        target="_blank"
+                                        data-toggle="tooltip" 
+                                        [title]="link"
+                                        >
+                                        <span>Image {{ i+1 }}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div *ngIf="PageUrls.length > 0 ? false: true"> 
+                                    <h3 style="font-size: 12px;font-weight: 400;color: #6B6B6B;text-align: center;">No Matching Link Found.</h3>
+                                </div>
+                            </div>
+                            <!-- partial matching urls  -->
+                            <div style="padding: 5px;margin: 5px;" *ngIf="feature.count > 0 ? true:false;">
+                                <h6 style="margin: 15px 0 5px 0;font-size: 14px;font-weight: 600;">Pages with Partial matching images:</h6>
+                                <div class="no-scroll" *ngIf="PartialMatchingUrls.length > 0 ? true: false" style="max-height: 120px;overflow-y: auto;">
+                                    <div class="d-flex flex-wrap align-items-center" style="width: 350px;">
+                                        <a
+                                        *ngFor="let link of PartialMatchingUrls;let i = index;"
+                                        class="urls"
+                                        [href]="link" 
+                                        target="_blank"
+                                        data-toggle="tooltip" 
+                                        [title]="link"
+                                        >
+                                        <span>Image {{ i+1 }}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div *ngIf="PartialMatchingUrls.length > 0 ? false: true"> 
+                                    <h3 style="font-size: 12px;font-weight: 400;color: #6B6B6B;text-align: center;">No Matching Link Found.</h3>
+                                </div>
+                            </div>
+                            <!-- similar image urls  -->
+                            <div style="padding: 5px;margin: 5px;" *ngIf="feature.count > 0 ? true:false;">
+                                <h6 style="margin: 15px 0 5px 0;font-size: 14px;font-weight: 600;">Pages with visually similar images:</h6>
+                                <div class="no-scroll" *ngIf="SimilarImageUrls.length > 0 ? true: false" style="max-height: 120px;overflow-y: auto;">
+                                    <div class="d-flex flex-wrap align-items-center" style="width: 350px;">
+                                        <a
+                                        *ngFor="let link of SimilarImageUrls;let i = index;"
+                                        class="urls"
+                                        [href]="link" 
+                                        target="_blank"
+                                        data-toggle="tooltip" 
+                                        [title]="link"
+                                        >
+                                        <span>Image {{ i+1 }}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div *ngIf="SimilarImageUrls.length > 0 ? false: true"> 
+                                    <h3 style="font-size: 12px;font-weight: 400;color: #6B6B6B;text-align: center;">No Matching Link Found.</h3>
+                                </div>
+                            </div>
+                            <div style="padding: 20px 0;" *ngIf="feature.count === '0'? true:false;">
+                                <h3 style="font-size: 12px;font-weight: 400;color: #6B6B6B;text-align: center;">There is no content.</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- face -->
+                    <div *ngIf="feature.label === 'Face'? true:false" [ngClass]="{'show': feature.switch}" class="collapse-div" id="Face">
+                        <div class="article">
+                            <ng-container *ngIf="feature.count > 0? true:false;">
+                                <div class="web-detect-face" *ngFor="let content of FaceContent;let i = index;" [ngClass]="{'active': content.active}" (mouseenter)="ToggleFace(content.key)" (mouseleave)="ToggleFaceOff(content.key)">
+                                    <div>
+                                        <div class="d-flex align-items-center justify-content-start">
+                                            <span style="font-size: 18px;font-weight: 600;font-family: 'Source Sans Pro';">Face {{i + 1}}</span>
+                                            <div><span style="margin: 0 0 0 17px;color: #AFAFAF;font-size: 13px;font-weight: 400;font-family: 'Source Sans Pro';">Pan:</span> <small style="color: #AFAFAF;">{{ content.pan_angle }}&deg;</small></div>
+                                            <div><span style="margin: 0 0 0 17px;color: #AFAFAF;font-size: 13px;font-weight: 400;font-family: 'Source Sans Pro';">Roll:</span> <small style="color: #AFAFAF;">{{ content.roll_angle }}&deg;</small></div>
+                                            <div><span style="margin: 0 0 0 17px;color: #AFAFAF;font-size: 13px;font-weight: 400;font-family: 'Source Sans Pro';">Tilt:</span> <small style="color: #AFAFAF;">{{ content.tilt_angle }}&deg;</small></div> 
+                                        </div>
+                                        <h3 style="color: #000;font-size: 15px;font-family: 'Source Sans Pro', sans-serif;margin: 10px 0;">ANGER</h3>
+                                        <div class="d-flex align-items-center justify-content-start">
+                                            <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0;">Very Unlikely</h6>
+                                            <div class="progress" style="width:271px!important;height: 7px!important;margin: 0 0 0 5px">
+                                                <div class="progress-bar" [ngStyle]="{'width': content.anger}" style="background-color: #007DFF!important;box-shadow: 0px 0px 5px #0000005E;border-radius: 4px;"></div>
+                                            </div>
+                                            <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 0 5px;">Very Likely</h6>
+                                        </div>
+                                        <h3 style="color: #000;font-size: 15px;font-family: 'Source Sans Pro', sans-serif;margin: 10px 0;">BLURRED</h3>
+                                        <div class="d-flex align-items-center justify-content-start">
+                                            <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0;">Very Unlikely</h6>
+                                            <div class="progress" style="width:271px!important;height: 7px!important;margin: 0 0 0 5px">
+                                                <div class="progress-bar" [ngStyle]="{'width': content.blurred}" style="background-color: #007DFF!important;box-shadow: 0px 0px 5px #0000005E;border-radius: 4px;"></div>
+                                            </div>
+                                            <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 0 5px;">Very Likely</h6>
+                                        </div>
+                                        <h3 style="color: #000;font-size: 15px;font-family: 'Source Sans Pro', sans-serif;margin: 10px 0;">HEAD WEAR</h3>
+                                        <div class="d-flex align-items-center justify-content-start">
+                                            <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0;">Very Unlikely</h6>
+                                            <div class="progress" style="width:271px!important;height: 7px!important;margin: 0 0 0 5px">
+                                                <div class="progress-bar" [ngStyle]="{'width': content.head_wear}" style="background-color: #007DFF!important;box-shadow: 0px 0px 5px #0000005E;border-radius: 4px;"></div>
+                                            </div>
+                                            <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 0 5px;">Very Likely</h6>
+                                        </div>
+                                        <h3 style="color: #000;font-size: 15px;font-family: 'Source Sans Pro', sans-serif;margin: 10px 0;">SORROW</h3>
+                                        <div class="d-flex align-items-center justify-content-start">
+                                            <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0;">Very Unlikely</h6>
+                                            <div class="progress" style="width:271px!important;height: 7px!important;margin: 0 0 0 5px">
+                                                <div class="progress-bar" [ngStyle]="{'width': content.sorrow}" style="background-color: #007DFF!important;box-shadow: 0px 0px 5px #0000005E;border-radius: 4px;"></div>
+                                            </div>
+                                            <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 0 5px;">Very Likely</h6>
+                                        </div>
+                                        <h3 style="color: #000;font-size: 15px;font-family: 'Source Sans Pro', sans-serif;margin: 10px 0;">SURPRISE</h3>
+                                        <div class="d-flex align-items-center justify-content-start">
+                                            <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0;">Very Unlikely</h6>
+                                            <div class="progress" style="width:271px!important;height: 7px!important;margin: 0 0 0 5px">
+                                                <div class="progress-bar" [ngStyle]="{'width': content.surprise}" style="background-color: #007DFF!important;box-shadow: 0px 0px 5px #0000005E;border-radius: 4px;"></div>
+                                            </div>
+                                            <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 0 5px;">Very Likely</h6>
+                                        </div>
+                                        <h3 style="color: #000;font-size: 15px;font-family: 'Source Sans Pro', sans-serif;margin: 10px 0;">JOY</h3>
+                                        <div class="d-flex align-items-center justify-content-start">
+                                            <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0;">Very Unlikely</h6>
+                                            <div class="progress" style="width:271px!important;height: 7px!important;margin: 0 0 0 5px">
+                                                <div class="progress-bar" [ngStyle]="{'width': content.joy}" style="background-color: #007DFF!important;box-shadow: 0px 0px 5px #0000005E;border-radius: 4px;"></div>
+                                            </div>
+                                            <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 0 5px;">Very Likely</h6>
+                                        </div>
+                                    </div>
+                                    <h3 style="color: #000;font-size: 15px;font-family: 'Source Sans Pro', sans-serif;margin: 10px 0 0 0;">CONFIDENCE</h3>
+                                    <div class="d-flex align-items-center justify-content-start">
+                                        <div class="progress">
+                                            <div class="progress-bar" [ngStyle]="{'width': content.detection_confidence}"></div>
+                                        </div>
+                                        <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 0 5px;">{{content.detection_confidence}}</h6>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <div style="padding: 20px 0;" *ngIf="feature.count === '0'? true:false;">
+                                <h3 style="font-size: 12px;font-weight: 400;color: #6B6B6B;text-align: center;">There is no content.</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- text -->
+                    <div *ngIf="feature.label === 'Text'? true:false" [ngClass]="{'show': feature.switch}" class="collapse-div" id="Text">
+                        <div class="article">
+                            <div class="web-detect" *ngIf="feature.count > 0? true:false;">
+                                <span *ngFor="let d of textDetects;" [ngClass]="{'active': d.active}" (mouseenter)="ToggleText(d.key)" (mouseleave)="ToggleTextOff(d.key)" >
+                                    <ng-container *ngIf="d.label" >
+                                        {{ d.label }}
+                                    </ng-container>
+                                </span>
+                            </div>
+                            <div style="padding: 20px 0;" *ngIf="feature.count === '0'? true:false;">
+                                <h3 style="font-size: 12px;font-weight: 400;color: #6B6B6B;text-align: center;">There is no content.</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- logo -->
+                    <div *ngIf="feature.label === 'Logo Detection'? true:false" [ngClass]="{'show': feature.switch}" class="collapse-div" id="Logo">
+                        <div class="article">
+                            <div class="web-detect" *ngIf="feature.count > 0? true:false;">
+                                <span *ngFor="let d of logoDetects;" [ngClass]="{'active': d.active}" (mouseenter)="ToggleLogo(d.key)" (mouseleave)="ToggleLogoOff()">
+                                    <ng-container *ngIf="d.label">
+                                        {{ d.label }}
+                                    </ng-container>
+                                </span>
+                            </div>
+                            <div style="padding: 5px; margin: 5px;" *ngIf="feature.count > 0 ? true:false;">
+                                <h3 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 4px 0;">Confidence</h3>
+                                <div class="d-flex align-items-center justify-content-start" >
+                                    <div class="progress">
+                                        <div class="progress-bar" [ngStyle]="{'width': currentLogoConfidence}"></div>
+                                    </div>
+                                    <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 0 5px;">{{currentLogoConfidence}}</h6>
+                                </div>
+                            </div>
+                            <div style="padding: 20px 0;" *ngIf="feature.count === '0'? true:false;">
+                                <h3 style="font-size: 12px;font-weight: 400;color: #6B6B6B;text-align: center;">There is no content.</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- objects -->
+                    <div *ngIf="feature.label === 'Objects'? true:false" [ngClass]="{'show': feature.switch}" class="collapse-div" id="Objects">
+                        <div class="article">
+                            <div class="web-detect" *ngIf="feature.count > 0? true:false;">
+                                <span *ngFor="let d of objectDetects;" [ngClass]="{'active': d.active}" (mouseenter)="ToggleObject(d.key)"  (mouseleave)="ToggleObjectoff(d.key)">
+                                    <ng-container *ngIf="d.label">
+                                        {{ d.label }}
+                                    </ng-container>
+                                </span>
+                            </div>
+                            <div  style="margin: 5px;padding: 5px;" *ngIf="feature.count > 0? true:false;">
+                                <h3 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 4px 0;">Confidence</h3>
+                                <div class="d-flex align-items-center justify-content-start">
+                                    <div class="progress">
+                                        <div class="progress-bar" [ngStyle]="{'width': currentObjectConfidence}"></div>
+                                    </div>
+                                    <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 0 5px;">{{currentObjectConfidence}}</h6>
+                                </div>
+                            </div>
+                            <div style="padding: 20px 0;" *ngIf="feature.count === '0'? true:false;">
+                                <h3 style="font-size: 12px;font-weight: 400;color: #6B6B6B;text-align: center;">There is no content.</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- label -->
+                    <div *ngIf="feature.label === 'Label Detection'? true:false" [ngClass]="{'show': feature.switch}" class="collapse-div" id="Label">
+                        <div class="article" >
+                            <div class="web-detect" *ngIf="feature.count > 0? true:false;">
+                                <span *ngFor="let d of labelDetects;" [ngClass]="{'active': d.active}" (mouseenter)="ToggleLabel(d.key)">
+                                    <div *ngIf="d.label" >
+                                        {{ d.label }}
+                                    </div>
+                                    <div *ngIf="!d.label" >
+                                        undefined
+                                    </div>
+                                </span>
+                            </div>
+                            <div  style="padding: 5px;margin: 5px;" *ngIf="feature.count > 0? true:false;">
+                                <h3 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 4px 0;">Confidence</h3>
+                                    <div class="d-flex align-items-center justify-content-start">
+                                        <div class="progress">
+                                            <div class="progress-bar" [ngStyle]="{'width': currentLabelConfidence}"></div>
+                                        </div>
+                                        <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 0 5px;">{{currentLabelConfidence}}</h6>
+                                    </div>
+                                    <h3 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 4px 0;">Topicality</h3>
+                                    <div class="d-flex align-items-center justify-content-start">
+                                        <div class="progress">
+                                            <div class="progress-bar" [ngStyle]="{'width': currentTopicality}"></div>
+                                        </div>
+                                        <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 0 5px;">{{currentTopicality}}</h6>
+                                    </div>
+                            </div>
+                            <div style="padding: 20px 0;" *ngIf="feature.count === '0'? true:false;">
+                                <h3 style="font-size: 12px;font-weight: 400;color: #6B6B6B;text-align: center;">There is no content.</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- image property -->
+                    <div *ngIf="feature.label === 'Image Properties'? true:false" [ngClass]="{'show': feature.switch}" class="collapse-div" id="Image">
+                        <div class="article" style="height: 190px;" *ngIf="feature.count > 0? true:false;">
+                            <h3 style="font-size: 18px;font-family:'Source Sans Pro', sans-serif;font-weight: 600;margin: 5px;color: #292929;padding: 5px;">Dominant Colors</h3>
+                            <div class="web-detect-properties" *ngIf="feature.count > 0? true:false;">
+                                <div *ngFor="let d of imageProperty;let i = index;">
+                                    <div (click)="ToggleColor(i)" [ngClass]="{'active': d.active}" class="color-box" [ngStyle]="{'background-color': d.color}"></div>
+                                </div>
+                            </div>    
+                            <h6  style="margin: 5px;font-size: 13px;font-weight: 400;font-family: 'Source Sans Pro', sans-serif;font-style: italic;color: #393939;">{{currentColor}}</h6>
+                            <div class="d-flex align-items-center justify-content-start">
+                                <h6 style="margin: 5px;font-size: 13px;font-weight: 400;font-family: 'Source Sans Pro', sans-serif;font-style: italic;color: #393939;">CONFIDENCE</h6>
+                                <div class="progress">
+                                    <div class="progress-bar" [ngStyle]="{'width': currentColorConfidence}"></div>
+                                </div>
+                                <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 0 5px;">{{currentColorConfidence}}</h6>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-start">
+                                <h6 style="margin: 5px;font-size: 13px;font-weight: 400;font-family: 'Source Sans Pro', sans-serif;font-style: italic;color: #393939;">Pixel Fraction</h6>
+                                <div class="progress">
+                                    <div class="progress-bar" [ngStyle]="{'width': currentColorFraction}"></div>
+                                </div>
+                                <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 0 5px;">{{currentColorFraction}}</h6>
+                            </div>
+                            <div style="padding: 20px 0;" *ngIf="feature.count === '0'? true:false;">
+                                <h3 style="font-size: 12px;font-weight: 400;color: #6B6B6B;text-align: center;">There is no content.</h3>
+                            </div>
+                        </div>
+                        <div style="padding: 20px 0;" *ngIf="feature.count === '0'? true:false;">
+                            <h3 style="font-size: 12px;font-weight: 400;color: #6B6B6B;text-align: center;">There is no content.</h3>
+                        </div>
+                    </div>
+                    <!-- Explicit Contents -->
+                    <div *ngIf="feature.label === 'Explicit Contents'? true:false" [ngClass]="{'show': feature.switch}" class="collapse-div" id="Explicit">
+                        <div class="article" *ngIf="feature.count > 0? true:false;">
+                            <div class="web-detect-explicit" *ngIf="feature.count > 0? true:false;">
+                                <h3 style="color: #000;font-size: 15px;font-family: 'Source Sans Pro', sans-serif;margin: 10px 0;">ADULT</h3>
+                                <div class="d-flex align-items-center justify-content-start">
+                                    <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0;">Very Unlikely</h6>
+                                    <div class="progress" style="width:271px!important;height: 7px!important;margin: 0 0 0 5px">
+                                        <div class="progress-bar" [ngStyle]="{'width': ExplicitContent[0].adult}" style="background-color: #007DFF!important;box-shadow: 0px 0px 5px #0000005E;border-radius: 4px;"></div>
+                                    </div>
+                                    <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 0 5px;">Very Likely</h6>
+                                </div>
+                                <h3 style="color: #000;font-size: 15px;font-family: 'Source Sans Pro', sans-serif;margin: 10px 0;">MEDICAL</h3>
+                                <div class="d-flex align-items-center justify-content-start">
+                                    <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0;">Very Unlikely</h6>
+                                    <div class="progress" style="width:271px!important;height: 7px!important;margin: 0 0 0 5px">
+                                        <div class="progress-bar" [ngStyle]="{'width': ExplicitContent[0].medical}" style="background-color: #007DFF!important;box-shadow: 0px 0px 5px #0000005E;border-radius: 4px;"></div>
+                                    </div>
+                                    <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 0 5px;">Very Likely</h6>
+                                </div>
+                                <h3 style="color: #000;font-size: 15px;font-family: 'Source Sans Pro', sans-serif;margin: 10px 0;">RACY</h3>
+                                <div class="d-flex align-items-center justify-content-start">
+                                    <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0;">Very Unlikely</h6>
+                                    <div class="progress" style="width:271px!important;height: 7px!important;margin: 0 0 0 5px">
+                                        <div class="progress-bar" [ngStyle]="{'width': ExplicitContent[0].racy}" style="background-color: #007DFF!important;box-shadow: 0px 0px 5px #0000005E;border-radius: 4px;"></div>
+                                    </div>
+                                    <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 0 5px;">Very Likely</h6>
+                                </div>
+                                <h3 style="color: #000;font-size: 15px;font-family: 'Source Sans Pro', sans-serif;margin: 10px 0;">SPOOFED</h3>
+                                <div class="d-flex align-items-center justify-content-start">
+                                    <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0;">Very Unlikely</h6>
+                                    <div class="progress" style="width:271px!important;height: 7px!important;margin: 0 0 0 5px">
+                                        <div class="progress-bar" [ngStyle]="{'width': ExplicitContent[0].spoofed}" style="background-color: #007DFF!important;box-shadow: 0px 0px 5px #0000005E;border-radius: 4px;"></div>
+                                    </div>
+                                    <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 0 5px;">Very Likely</h6>
+                                </div>
+                                <h3 style="color: #000;font-size: 15px;font-family: 'Source Sans Pro', sans-serif;margin: 10px 0;">VIOLENCE</h3>
+                                <div class="d-flex align-items-center justify-content-start">
+                                    <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0;">Very Unlikely</h6>
+                                    <div class="progress" style="width:271px!important;height: 7px!important;margin: 0 0 0 5px">
+                                        <div class="progress-bar" [ngStyle]="{'width': ExplicitContent[0].violence}" style="background-color: #007DFF!important;box-shadow: 0px 0px 5px #0000005E;border-radius: 4px;"></div>
+                                    </div>
+                                    <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 0 5px;">Very Likely</h6>
+                                </div>
+                            </div>   
+                            <div style="padding: 20px 0;" *ngIf="feature.count === '0'? true:false;">
+                                <h3 style="font-size: 12px;font-weight: 400;color: #6B6B6B;text-align: center;">There is no content.</h3>
+                            </div>
+                        </div>
+                        <div style="padding: 20px 0;" *ngIf="feature.count === '0'? true:false;">
+                            <h3 style="font-size: 12px;font-weight: 400;color: #6B6B6B;text-align: center;">There is no content.</h3>
+                        </div>
+                    </div>
+                    <!-- Landmarks -->
+                    <div *ngIf="feature.label === 'Landmarks'? true:false" [ngClass]="{'show': feature.switch}" class="collapse-div" id="Landmarks">
+                       <div class="article">
+                            <div class="web-detect" *ngIf="feature.count > 0? true:false;">
+                                <span *ngFor="let d of landMarks;" [ngClass]="{'active': d.active}" (mouseenter)="ToggleLandmark(d.key)" (mouseleave)="ToggleLandmarkoff(d.key)">
+                                    <ng-container *ngIf="d.label">
+                                        {{ d.label }}
+                                    </ng-container>
+                                </span>
+                            </div>
+                            <div  style="padding: 5px;margin: 5px;" *ngIf="feature.count > 0 ? true:false;">
+                                <div>
+                                    <h4 style="font-size: 13px;font-weight: 400;font-family: 'Source Sans Pro', sans-serif;margin: 0;">Latitude: <small>{{currentLatitude}}</small></h4>
+                                    <h4 style="font-size: 13px;font-weight: 400;font-family: 'Source Sans Pro', sans-serif;margin: 0;">Longitude: <small>{{currentLongitude}}</small></h4>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-start">
+                                    <div class="progress">
+                                        <div class="progress-bar" [ngStyle]="{'width': currentLandConfidence}"></div>
+                                    </div>
+                                    <h6 style="color: #8F8F8F;font-size: 13px;font-family: 'Source Sans Pro', sans-serif;margin: 0 0 0 5px;">{{currentLandConfidence}}</h6>
+                                </div>
+                            </div>
+                            <div style="padding: 20px 0;" *ngIf="feature.count === '0'? true:false;">
+                                <h3 style="font-size: 12px;font-weight: 400;color: #6B6B6B;text-align: center;">There is no content.</h3>
+                            </div>
+                       </div>
+                    </div>
+                </div>
+                <div class="mb-4" *ngFor="let feature of not_available_Features" class="features-wrapper">
+                    <div class="d-flex align-items-center disabled-features" >
+                        <h4 class="title" (click)="showFeature(feature.label)">{{ feature.label }}</h4>
+                        <button (click)="Enable(feature.label)" class="btn btn-primary-enable">Enable</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade show" style="min-width: 1136px;" [ngStyle]="{'display': Display}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+            <h4 style="margin: 0;font-size: 27px;font-weight: 600;color: #111D35;text-align: center;">{{ EnableFeature }} </h4>
+            <h6 style="margin: 0;font-size: 22px;font-weight: 400;color: #111D35;text-align: center;">$0.1 / Minute</h6>
+            <div class="d-flex justify-content-center" style="margin: 32px 0 0 0;">
+                <button (click)="Discard()" class="btn btn-primary-discard">Discard</button>
+                <button (click)="AddFeature(EnableFeature)" class="btn btn-primary-Enable">Enable</button>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>

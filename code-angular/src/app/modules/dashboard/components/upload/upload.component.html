@@ -1,0 +1,17 @@
+<div class="container-fluid p-0 d-flex flex-column align-items-center" style="background-color: #081122;border-bottom-right-radius: 5px;border-bottom-left-radius: 5px;">
+    <ul class="nav nav-tabs">
+        <li class="nav-item" style="margin: 0 66px 0 0;">
+          <div class="nav-link video-link" (mouseenter)="ToggleVideoIcon()" (mouseleave)="ToggleVideoIcon()" (click)="SwitchToVideo()" [ngClass]="{active: VideoCompBool}">
+           <img style="padding-bottom: 3px;" *ngIf="videoIcon" src="../../../../../assets/icons/Icon awesome-video.svg" alt="Video">
+           <img style="padding-bottom: 3px;" *ngIf="!videoIcon" src="../../../../../assets/icons/Icon awesome-video alt.svg" alt="Video"> Video</div>
+        </li>
+        <li class="nav-item">
+          <div class="nav-link image-link" (mouseenter)="ToggleImageIcon()" (mouseleave)="ToggleImageIcon()" (click)="SwitchToImage()" [ngClass]="{active: ImageCompBool}" >
+            <img style="padding-bottom: 3px;" *ngIf="!imageIcon" src="../../../../../assets/icons/Icon ionic-md-image.svg" alt="Image">
+            <img style="padding-bottom: 3px;" *ngIf="imageIcon" src="../../../../../assets/icons/Icon ionic-md-image alt.svg" alt="Image"> Image</div>
+        </li>
+      </ul>
+      <div *ngIf="VideoCompBool; then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock><upload-video (switch)="VideoUploaded()"></upload-video></ng-template>
+      <ng-template #elseBlock><upload-image (switch)="ImageUploaded()"></upload-image></ng-template>     
+</div>

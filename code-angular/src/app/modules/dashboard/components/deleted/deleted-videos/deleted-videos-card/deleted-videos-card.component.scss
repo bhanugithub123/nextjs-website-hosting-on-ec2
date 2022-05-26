@@ -1,0 +1,43 @@
+$font-stack: 'Open Sans', sans-serif;
+.card {
+    font-family: $font-stack;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: transparent;
+    margin-top: 10px;
+    .card-body {
+        background-color: #585858;
+        width: 190px;
+        height: 90px;
+        padding: 0;
+        overflow: hidden;
+    }    
+}
+
+.video-name {
+    display: none;
+    width: 270px;
+    color: #FFF;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 0 5px;
+    position: absolute;
+    left: 2px;
+    top: 28px;
+    z-index: 2;
+    &::before {
+        content: "";
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid rgba(0, 0, 0, 0.8);
+        top: -8px;
+        left: 4px;
+        position: absolute;
+        margin: 0;
+        padding: 0;
+    }
+    &.show {
+        display: block;
+    }
+}

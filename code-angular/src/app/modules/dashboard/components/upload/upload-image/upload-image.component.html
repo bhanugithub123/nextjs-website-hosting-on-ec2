@@ -1,0 +1,125 @@
+<div class="container-fluid d-flex align-items-center flex-column" style="border-bottom-right-radius: 5px;border-bottom-left-radius: 5px;color: white;overflow: hidden;height: 275px;">
+    <div class="d-flex align-items-center" style="width: 508px;padding: 10px 0 15px 25px;">
+        <h4 style="font-size:26px;font-weight: 600;margin: 0 31px 0 0;">Select the features you want</h4>
+        <label style="margin: 0;font-size: 15px;font-weight: 600;">
+            <span 
+             style="font-size: 15px;font-weight: 500;" 
+             *ngIf="selectedCount > 0 && selectedCount < 10" 
+             >0</span>{{selectedCount}} Selection
+            </label>
+    </div>
+    <div class="container d-flex justify-content-center align-items-center flex-column text-center">
+        <div class="grid-container" >
+            <div *ngFor="let item of labels1" class="grid-col">
+                <div
+                 class="features"
+                 [ngClass]="{'active': item.active}" 
+                 (click)="selected(item.label, item.amount, item.price, item.feature, 1)"
+                 style="margin-bottom: 7px;"
+                 >
+                    <span style="position: absolute;width: 100%;height: 100%;left: 0;top: 0;z-index: 2;padding: 0.5rem 0;">
+                        {{ item.label }}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="grid-container-2 mt-1">
+            <div *ngFor="let item of labels2" class="grid-col">
+                <div
+                 class="features"
+                 [ngClass]="{'active': item.active}"
+                 (click)="selected(item.label, item.amount, item.price, item.feature, 2)"
+                 style="margin-bottom: 7px;"
+                 >
+                    <span style="position: absolute;width: 100%;height: 100%;left: 0;top: 0;z-index: 2;padding: 0.5rem 0;">
+                        {{ item.label }}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-container-3 mt-1">
+            <div *ngFor="let item of labels3" class="grid-col">
+                <div
+                 class="features"
+                 [ngClass]="{'active': item.active}"
+                 (click)="selected(item.label, item.amount, item.price,item.feature, 3)"
+                 style="margin-bottom: 7px;"
+                 >
+                    <span style="position: absolute;width: 100%;height: 100%;left: 0;top: 0;z-index: 2;padding: 0.5rem 0;">
+                        {{ item.label }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container total text-center" style="margin: 21px 0 19px 0;">
+        <small (click)="ClearAll()" style="margin: 0 17px 0 0;">Clear All</small>
+        <small (click)="SelectAll()">Select All</small>
+    </div>
+</div>
+<div class="container-fluid upload-section text-center p-3 d-flex align-items-center justify-content-center">
+    <div
+     (drop)="onChange($event, true)"
+     (dragover)="onDragOver($event)"
+     class="form"
+     >
+        <img width="48px" height="48px" src="../../../../../../assets/icons/Icon awesome-image.svg" alt="image">
+        <div class="form-group" style="margin: 15px 0 0 0;position: relative;">
+            <h5 style="font-size: 12px;font-weight: 500;margin: 0;text-align: left;font-family: 'Source Sans Pro', sans-serif;">Drag and Drop Images Here</h5>
+            <h5 style="font-size: 12px;font-weight: 500;text-align: left;text-align: center;margin: 3px 0;font-family: 'Source Sans Pro', sans-serif;">or</h5>
+            <input
+            id="file"
+            type="file" 
+            name="files" 
+            class="custom-input"
+            (change)="onChange($event, false)"
+            accept=".png, .jpg, .jpeg, .jfif"
+            multiple
+            [disabled]="fileUploading"
+            >
+            <button (click)="uploadClicked()" class="custom-input-btn">Choose File</button>
+        </div>
+    </div>
+    <div style="width: 350px;margin: 0 0 0 10px;position: relative;height: 170px;">
+       <div class="d-flex align-items-center" style="position: absolute;top: 0;">
+            <div>
+                <div>
+                    <h5 *ngIf="fileUploading" style="text-align: left; font-size: 15px;font-weight: 700;color: white;margin: 0;">Uploading</h5>
+                    <!-- to be uploaded Files -->
+                    <div *ngIf="!fileUploaded" style="overflow-y: auto;max-height: 150px;width: 350px;overflow-x: hidden">
+                        <image-uploading 
+                        *ngFor="let f of file;let i = index"
+                        [Thumbnail]="f.thumbnail"
+                        [Name]="f.file.name"
+                        (Delete)="DeleteFile(i)"
+                        [Progress]="uploadProgress[i]"
+                        ></image-uploading>
+                    </div>
+                </div>
+                <div>
+                    <h5 *ngIf="fileUploaded" style="text-align: left; font-size: 15px;font-weight: 700;color: white;margin: 0;">Uploaded</h5>
+                    <!-- to be uploaded Files -->
+                    <div *ngIf="fileUploaded" style="overflow-y: auto;max-height: 150px;width: 350px;overflow-x: hidden">
+                        <image-uploaded 
+                        *ngFor="let f of file;let i = index"
+                        [Thumbnail]="f.thumbnail"
+                        [Name]="f.file.name"
+                        [Progress]="uploadProgress[i]"
+                        ></image-uploaded>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="uploadBtn">
+                <div class="d-flex justify-content-end" style="padding: 0 0 0 10px;">
+                    <button (click)="upload()" class="btn btn-primary">Upload</button>
+                </div>
+            </div>
+            <div *ngIf="fileUploaded" style="padding: 0 0 0 10px;">
+                <div class="d-flex justify-content-end">
+                    <button (click)="CloseModal()" class="btn btn-primary">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

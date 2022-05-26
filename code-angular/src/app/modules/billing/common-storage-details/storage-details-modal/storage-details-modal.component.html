@@ -1,0 +1,80 @@
+<div class="content">
+    <div class="price-cards">
+        <label (click)="setPlan(3)" class="price-card" [ngClass]="{'active': active3}"><span>10 GB</span><span>$5</span><span>per month</span></label>
+        <label (click)="setPlan(2)" class="price-card" [ngClass]="{'active': active2}"><span>20 GB</span><span>$15</span><span>per month</span></label>
+        <label (click)="setPlan(1)" class="price-card" [ngClass]="{'active': active1}"><span>50 GB</span><span>$25</span><span>per month</span></label>
+    </div>
+    <div class="note-container">
+        <h5><strong>Note :</strong> The amount will be deduct from your available balance in your account</h5>
+        <div class="buy-now-btn">
+            <button [disabled]="processing" class="btn-buy" (click)="BuyStorage()">
+                <span *ngIf="!processing">Buy Now</span>
+                <div *ngIf="processing" class="spinner-border" role="status">
+                </div>
+            </button>
+            <button class="btn-buy ml-2" (click)="ToggleUnsubscribeModal()">Unsubscribe</button>
+        </div>
+    </div>
+</div>
+
+<div class="unsubscribe-modal" *ngIf="ShowModal" (click)="CloseUnsubscribeModal($event)" id="modal">
+    <div>
+        <div class="modal-header">
+            <div class="d-flex align-items-center">
+                <amount-available>{{amountAvailable}}$</amount-available>
+                <div class="progressbar center">
+                    <div class="half-circle" #circle1></div>
+                    <div class="half-circle" #circle2></div>
+                    <div class="half-circle-top" #halfCircleTop></div>
+                    <div class="progressbar-circle center d-flex flex-column justify-content-center">
+                        <span>
+                            {{percentage_used}}
+                        </span>
+                        <span style="font-size: 10px;font-weight: 400;">used</span>
+                    </div>
+                </div>
+                <div class="storage-details">
+                    <h5 style="color: #FFF;">{{used_space}}</h5>
+                    <h6 style="color: #FFF;">of {{available_space}} GB</h6>
+                    <p style="color: #FFF;"><strong>Note:-</strong> 10 GBs are freely initiated to your account but can be only used after adding a balance</p>
+                </div>
+            </div>
+            <button (click)="ToggleUnsubscribeModal()" type="button" class="close pull-right" aria-label="Close">
+                <span aria-hidden="true"><img src="/assets/icons/Icon ionic-ios-close.svg" alt="close" ></span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div>
+                <h2>SELECT THE PLANS YOU WANT TO UNSUBSCRIBE FROM</h2>
+                <div class="price-cards my-4">
+                    <label
+                     *ngFor="let obj of activePlans;"
+                     (click)="SelectPlan(obj.memory_id)" 
+                     class="price-card" 
+                     [ngClass]="{'active': obj.active, 'disabled': !obj.canUnsubscribe}"
+                     >
+                     <span>{{obj.space}} GB</span>
+                     <span>${{obj.amount}}</span>
+                     <span>per month</span>
+                    </label>
+                    <h5 *ngIf="activePlans.length === 0">No Active Plans</h5>
+                </div>
+                <div class="notice">
+                    <ul>
+                        <li>You can't Unsubscribe from a plan that is used or have files uploaded in.</li>
+                        <li>You will not get any refunds for the plans you're unsubscribing from.</li>
+                        <li>You can't unsubscribe from a plan that is used or have files uploaded in</li>
+                    </ul>
+                </div>
+                <div class="text-center">
+                    <button [disabled]="processingUnsubscribe" (click)="HandleUnsubscribeToStoragePlan()" class="btn-unsubscribe">
+                        <span *ngIf="!processingUnsubscribe">Unsubscribe</span>
+                        <div style="width: 1rem;height: 1rem;" *ngIf="processingUnsubscribe" class="spinner-border" role="status">
+                        </div>
+                    </button>
+                    <button (click)="ToggleUnsubscribeModal()" class="btn-cancel ml-2">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

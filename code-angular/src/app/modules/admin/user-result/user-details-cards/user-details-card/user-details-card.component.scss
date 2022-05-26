@@ -1,0 +1,200 @@
+$font-stack : 'Open Sans', sans-serif;
+$primary-color: #1255AF;
+$text-color: #FFF;
+$secondary-color: #9B9B9B;
+$text-color-secondary : #3BCBFF;
+
+.details-card{
+    height: 36px;
+    margin: 0 0 10px 0;
+    color: $text-color;
+    border: 1px solid;
+    display: grid;
+    grid-template-columns: 80px 150px 150px 150px;
+    &:hover{
+        background: $primary-color;
+        border: 1px solid $primary-color;
+    }
+    .column{
+        align-self: center;
+        &.deactivated{
+            color: $secondary-color;
+        }
+        h4{
+            font-size: 13px;
+            font-family: $font-stack;
+            font-weight: 600;
+            margin: 0;
+            text-align: center;
+        }
+    }
+}
+
+.pop-up{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    background-color: rgba($color: #000, $alpha: 0.1);
+    .pop-up-container{
+        position: absolute;
+        background: black;
+        width: 845px;
+        height: 440px;
+        background: #1C2F56;
+        box-shadow: 0px 0px 10px #0000005C;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.info-card{
+    min-width: 123px;
+    height: 55px;
+    background: #146FE9;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 29px 0 0;
+    h3{
+        margin: 0 0 5px 0;
+        font-size: 13px;
+        font-weight: 600;
+        color: #FFF;
+    }
+    h4{
+        margin: 0;
+        font-size: 13px;
+        font-weight: 400;
+        color: #FFF;
+    }
+    &:hover{
+        background-color: #2A85FF;
+    }
+}
+
+.nav{
+    border-bottom: 1px solid #9B9B9B;
+    .nav-link{
+        color: #8F8F8F;
+        padding: 8px 8px 4px 0;
+        position: relative;
+        cursor: pointer;
+        &:hover{
+            color: $text-color-secondary;
+        }
+        &.active{
+            color: $text-color-secondary;
+            &::after{
+                transform: scale(1);
+            }
+        }
+        &::after{
+            content: " ";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background-color: $text-color-secondary;
+            transform: scale(0, 1);
+            transition: transform 250ms ease-in-out;
+        }
+        &:hover::after{
+            transform: scale(1);
+        }
+    }
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 20px;
+}
+
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #4164a8;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 0px;
+    bottom: 0;
+    background-color: #4acdff;
+    transition: 0.4s;
+}
+  
+input:checked + .slider {
+    background-color: #2196F3;
+}
+  
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+} 
+  
+input:checked + .slider:before {
+    -webkit-transform: translateX(22px);
+    -ms-transform: translateX(22px);
+    transform: translateX(22px);
+}
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.status{
+    font-family: $font-stack;
+    font-size: 11px;
+    font-weight: 400;
+    color: #FFF;
+    &.blocked{
+        color: #64769a!important;
+    }
+}
+
+.btn-primary{
+    width: 70px;
+    height: 30px;
+    background: #3BCBFF;
+    border-radius: 4px;
+    color: #111D35;
+    font-weight: 600;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    padding: 0;
+    &:active{
+        background: #3BCBFF!important;
+        border-radius: 4px!important;
+        color: #111D35!important;
+    }
+    &:focus{
+        outline: none;
+        box-shadow: none;
+    }
+}

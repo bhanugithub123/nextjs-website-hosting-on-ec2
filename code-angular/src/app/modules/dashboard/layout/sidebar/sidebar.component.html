@@ -1,0 +1,148 @@
+<!-- Container for sidebar(s) + page content -->
+<ng-sidebar-container style="height: 100vh;width: 100%;">
+ 
+    <!-- A sidebar -->
+    <ng-sidebar [(opened)]="_opened" >
+      <div *ngIf="hamMenu" style="position: fixed;left: 260px;width: 40px;height: 100vh;display: block;background-color: #111d35;">
+        <span (click)="ToggleSidebar()" class="hamburger-menu"></span>
+      </div>
+      <div style="background-color: #111d35;height: 100%; width: 260px;color: white;position: relative;">
+        <div class="container text-center pt-3 ">
+          <img (click)="RouteToHome()" width="80px" height="65px" src="/assets/images/AI-For-You.png" alt="Ai for You" style="cursor: pointer;">
+        </div>
+        <div 
+        #home
+        class="container menu"
+        [routerLink]="['/home/video']"
+        [ngClass]="{'active':homeActive}"
+        >
+         <div class="border"></div>
+         <div>
+           <span style="padding-right: 10px;">
+             <img src="../../../../../assets/icons/house.svg" alt="home">
+           </span>
+           <span style="font-size: 15px;">
+             Home
+           </span>
+         </div>
+       </div>
+       <div 
+        #deleted
+        class="container menu"
+        style="margin: 0;"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}"
+        [routerLink]="['/home/deleted']"
+        >
+         <div class="border"></div>
+         <div>
+           <span style="padding-right: 10px;">
+             <img src="../../../../../assets/icons/Icon material-delete0 -w.svg" alt="Deleted">
+           </span>
+           <span style="font-size: 15px;">
+             Deleted
+           </span>
+         </div>
+       </div>
+       <div 
+         class="container menu"
+         style="margin: 0;"
+         [routerLink]="['/user-details']"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}"
+         >
+           <div class="border"></div>
+           <div>
+             <span style="padding-right: 10px;">
+               <img style="width: 12px;" src="/assets/icons/Path 390.svg" alt="user details">
+             </span>
+             <span style="font-size: 15px;">
+               Account Settings
+             </span>
+           </div>
+       </div>
+       <div 
+         class="container menu"
+         style="margin: 0;"
+         [routerLink]="['/billing/transactions']"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}"
+         >
+           <div class="border"></div>
+           <div>
+             <span style="padding-right: 0px;">
+               <img src="/assets/icons/Path 428 -w.svg" alt="user details">
+             </span>
+             <span style="font-size: 15px;">
+               Transaction History
+             </span>
+           </div>
+       </div>
+       <div 
+         class="container menu"
+         style="margin: 0;"
+         [routerLink]="['/billing/storage']"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}"
+         >
+           <div class="border"></div>
+           <div>
+             <span style="padding-right: 5px;">
+               <img src="/assets/icons/Path 439 -w.svg" alt="user details">
+             </span>
+             <span style="font-size: 15px;">
+               Storage
+             </span>
+           </div>
+       </div>
+        <!-- paynow -->
+        <div class="d-flex align-items-center flex-column" style="position: absolute;bottom: 35px;left: 50%;transform: translateX(-50%);">
+          <div class="amount"><span>{{amountAvailable}} $</span></div>
+          <button class="btn-addmore" (click)="TogglePayNowModal()"><span style="margin: 0 13px 0 -13px;">+</span>Add more</button>
+        </div>
+      </div>
+    </ng-sidebar>
+
+    <!-- Page content -->
+    <div ng-sidebar-content style="background-color: #f0f0f7!important;">
+      <div style="display: flex;align-items: flex-start;justify-content: flex-start;">
+        <div (click)="ToggleSidebar()" *ngIf="hamMenu" style="width: 40px;height: 100vh;display: block;background-color: #111d35;">
+          <span class="hamburger-menu"></span>
+        </div>
+        <div [ngStyle]="{'width': appHolderWidth}">
+          <app-header></app-header>
+          <router-outlet></router-outlet>
+          <ng-content></ng-content>
+        </div>
+      </div>
+      
+      
+    </div>
+
+</ng-sidebar-container>
+
+<!-- pay now modal -->
+<div *ngIf="showPayNowModal" class="paynow-modal" id="paynow-modal" (click)="ClosePayNowModal($event)">
+  <div class="paynow-content">
+    <div class="d-flex align-item-center justify-content-end" style="padding: 10px 10px 0 0;">
+        <img (click)="TogglePayNowModal()" style="cursor: pointer;" src="/assets/icons/Icon ionic-ios-close-b.svg" alt="close">
+    </div>
+    <div class="current-balance">
+      <h5>Current balance</h5>
+      <h4>${{amountAvailable}}</h4>
+    </div>
+    <div class="buy-more">
+        <h4>Enter amount</h4>
+        <div class="value-container">
+            <input #value type="number" class="input-value" (keypress)="PreventChars($event)" (keyup.enter)="InitiateTransaction()">
+            <span style="margin: 0 0 24px 0;">$</span>
+        </div>
+    </div>
+    <div class="buy-now-btn">
+        <button class="btn-buy" (click)="InitiateTransaction()">Buy Now</button>
+        <div *ngIf="proccessingTopup" class="spinner-border" role="status" style="width: 12px;height: 12px;margin:0 0 0 5px;">
+          <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+</div>

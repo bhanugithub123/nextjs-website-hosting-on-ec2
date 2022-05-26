@@ -1,0 +1,170 @@
+<!-- delete modal -->
+<div *ngIf="ShowDeleteModal" class="delete-modal">
+    <div style="display: flex;flex-direction: column;align-items: center;">
+        <h4>Are you sure you want to delete this video?</h4>
+        <div class="d-flex justify-content-center" style="margin: 32px 0 0 0;">
+            <button (click)="DeleteVideo()" class="btn btn-primary-Enable">Yes
+                <div *ngIf="deleting" class="spinner-border" role="status" style="width: 12px;height: 12px;margin: 0 0 2px 0;">
+                </div>
+            </button>
+            <button (click)="ToggleDeleteModal()" class="btn btn-primary-discard">No</button>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="container-fluid d-flex" style="padding: 3px 30px 0 0;">
+        <div>
+            <div style="position: relative;" (mouseenter)="ShowDeleteBtn()" (mouseleave)="HideDeleteBtn()">
+                <div *ngIf="DeleteBtn" class="delete-btn-wrapper">
+                    <img (click)="ToggleDeleteModal()" style="cursor: pointer;" src="/assets/icons/Icon material-delete0 -w.svg" alt="delete">
+                </div>
+                <video-player (videoLoaded)="VideoLoaded()" [info]="VideoData" [comp]="loadComponent"></video-player>
+            </div>
+            <div class="detection-details-wrapper">
+                <div *ngIf="videoLoaded" class="d-flex align-items-center">
+                    <div (click)="scrollToLeft()" style="cursor: pointer;margin: 0 6px 0 2px;">
+                        <img
+                         *ngIf="noleft"
+                         src="../../../../../../../../assets/icons/nav arrow disables.svg" 
+                         alt="prev"
+                         >
+                         <img
+                          *ngIf="!noleft"
+                          style="transform: rotate(180deg);" 
+                          src="../../../../../../../../assets/icons/nav arrow.svg" 
+                          alt="prev"
+                          >
+                    </div>
+                    <drag-scroll 
+                     (indexChanged)="indexChanged($event)"
+                     [drag-scroll-y-disabled]="true" 
+                     class="nav-tabs" 
+                     #nav 
+                     style="max-width: 840px;overflow-x: hidden;"
+                     >
+                        <li drag-scroll-item class="nav-item" [ngClass]="{'active': feature.active}" *ngFor="let feature of availableFeatures;let i = index;">
+                            <a
+                            style="cursor: pointer;"
+                            [attr.id] = "'label' + i" 
+                            class="nav-link"  
+                            (click)="SwitchFeature(feature.label)"
+                            ><span>{{feature.label}}</span>
+                            </a>
+                            <div *ngIf="!feature.processed" class="spinner-wrapper">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li drag-scroll-item class="nav-item" *ngFor="let feature of notavailableFeatures;let i = index;">
+                            <a
+                             class="nav-link disabled-feature"
+                             style="cursor: pointer;"
+                             (click)="Enable(feature.label)"
+                             ><span>{{feature.label}}</span>
+                            </a>
+                          </li>
+                    </drag-scroll>
+                    <div (click)="scrollToRight()" style="cursor: pointer;margin: 0 0 0 5px;">
+                        <img
+                        *ngIf="!noright"
+                         src="../../../../../../../../assets/icons/nav arrow.svg" 
+                         alt="next"
+                         >
+                         <img
+                         *ngIf="noright"
+                         style="transform: rotate(180deg);"
+                         src="../../../../../../../../assets/icons/nav arrow disables.svg" 
+                         alt="next"
+                         >
+                    </div>
+                </div>
+                <div *ngIf="videoLoaded" style="height: 40vh;">
+                    <face-detection
+                     *ngIf="loadComponent==='Face Detections'?true:false" 
+                     [info]="facesData"
+                     >
+                    </face-detection>
+
+                    <object-tracking
+                     *ngIf="loadComponent==='Object Tracking'?true:false" 
+                     [info]="objects"
+                     ></object-tracking>
+
+                    <label-detection
+                     *ngIf="loadComponent==='Label Detections'?true:false" 
+                     [info]="labels"
+                     ></label-detection>
+
+                    <text-detection
+                     *ngIf="loadComponent==='Text Detections'?true:false" 
+                     [info]="texts"
+                     ></text-detection>
+
+                    <speech-transcription
+                     *ngIf="loadComponent==='Speech Transcription'?true:false" 
+                     [info]="speechs"
+                     ></speech-transcription>
+
+                    <logo-detection
+                     *ngIf="loadComponent==='Logo Detections'?true:false" 
+                     [info]="logos"
+                     ></logo-detection>
+
+                    <person-detection
+                     *ngIf="loadComponent==='Person Detections'?true:false" 
+                     [info]="person"
+                     >
+                    </person-detection>
+
+                    <shot-detection
+                     *ngIf="loadComponent==='Shot Detections'?true:false" 
+                     [info]="shots"
+                     >
+                    </shot-detection>
+
+                    <explicit-content
+                     *ngIf="loadComponent==='Explicit Contents'?true:false" 
+                     [info]="explicit"
+                     >
+                    </explicit-content>
+                </div>
+            </div>
+        </div>
+        <div>
+        <div class="container" style="padding-left: 20px;margin-top: -38px;height: 340px;">
+            <h4 *ngIf="!showSpinner" style="margin: 0; font-weight: 400;font-family: 'Source Sans Pro', sans-serif;font-size: 24px;">Result</h4>
+            <div *ngIf="!showSpinner" class="applabel-container">
+                <app-labels *ngIf="featuresSet" [features]="features" (label)="SwitchLabel($event)"></app-labels>
+            </div>
+        </div>
+        
+        <div class="container" style="margin: 17px 0 0 0;padding-left: 20px;">
+            <h4 *ngIf="!showSpinner" style="font-weight: 400;font-family: 'Source Sans Pro', sans-serif;font-size: 24px;">Video Gallery</h4>
+            <ng-container *ngIf="!showSpinner">
+                <app-timeline [Videos]="timelineVideos"></app-timeline>
+            </ng-container>
+        </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade show" [ngStyle]="Display">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+            <h4 style="margin: 0;font-size: 27px;font-weight: 600;color: #111D35;text-align: center;">{{ EnableFeature }} </h4>
+            <h6 style="margin: 0;font-size: 22px;font-weight: 400;color: #111D35;text-align: center;">$0.1 / Minute</h6>
+            <div class="d-flex justify-content-center" style="    margin: 32px 0 0 0;">
+                <button (click)="Discard()" class="btn btn-primary-discard">Discard</button>
+                <div class="d-flex align-items-center">
+                    <button (click)="AddFeature(EnableFeature)" class="btn btn-primary-Enable">Enable</button>
+                    <div *ngIf="showSpinner" style="width: 12px;height: 12px;margin: 0 0 0 6px;" class="spinner-border" role="status">
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>

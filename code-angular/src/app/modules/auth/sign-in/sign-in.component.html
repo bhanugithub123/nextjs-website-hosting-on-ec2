@@ -1,0 +1,86 @@
+<div #alert class="alert">
+    {{ message }}
+</div>
+<div class="sign-in-main">
+    <div class="form-part">
+        <div class="pb-5 logo">
+            <img style="cursor: pointer;" [routerLink]="['']" width="80px" height="65px" src="/assets/images/AI-For-You.png" alt="logo">
+        </div>
+        <div>
+            <h2>Welcome back</h2>
+            <small>Please login to your account</small>
+        </div>
+        <div>
+            <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+                <div class="form-group mt-2" style="position: relative;">
+                    <div style="position: relative;">
+                        <img style="position: absolute;left: 11px;top: 50%;transform: translateY(-50%);" src="/assets/icons/Icon material-mail-outline.svg" alt="login">
+                        <input 
+                        placeholder="Enter your E-mail" 
+                        type="email" 
+                        class="form-control login-input"
+                        name="email"
+                        formControlName="email"
+                        [ngClass]="submitted && signInForm!.invalid ?'is-invalid': ''"
+                        >
+                        <div *ngIf="email!.invalid && submitted" class="invalid-feedback">
+                            <small *ngIf="email!.errors!.required">Please Enter Email</small>
+                            <small *ngIf="email!.errors!.email">Please Enter A Valid Email</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group pass-group mt-2">
+                    <div style="position: relative;">
+                        <img style="position: absolute;left: 11px;top: 50%;transform: translateY(-50%);" src="/assets/icons/Group 708.svg" alt="login">
+                        <img class="eye" (click)="TogglePasswordView()" src="../../../../assets/icons/Icon ionic-ios-eye.svg" alt="eye">
+                        <div>                        
+                            <input 
+                            placeholder="Enter your Password" 
+                            [type]="viewPassword ? 'text' : 'password'" 
+                            class="form-control login-input"
+                            name="password"
+                            formControlName="password"
+                            [ngClass]="submitted && signInForm!.invalid ?'is-invalid': ''"
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()]).{6,}"
+                            >
+                            <div *ngIf="password!.invalid && submitted" class="invalid-feedback" style="display: flex;align-items: center;flex-direction: column;justify-content: center;">
+                                <small *ngIf="password!.errors!.required">Please Enter Password</small>
+                                <small *ngIf="password!.errors!.minlength">Password should be greater than 6 characters</small>
+                                <small *ngIf="password!.errors?.pattern">Password should have atleast one Capital letter, Alpha-numeric digit, and a Number</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group d-flex align-content-center justify-content-between" style="margin: 20px 0 0 0;">
+                    <div class="d-flex align-items-center">
+                        <div class="checkbox mr-2" id="remember-me">
+                            <input #remember (change)="onChange($event)" type="checkbox">
+                        </div>
+                        <small (click)="ToogleCheckBox($event)" style="font-size: 14px;font-weight: 400;cursor: pointer;">Remember Me</small>
+                    </div>
+                    <small
+                     class="animate-bottom-border"
+                     style="cursor: pointer;font-size: 14px;font-weight: 600;" 
+                     [routerLink]="['./forgot-password']" 
+                     >Forgot Password ?</small>
+                </div>
+                <div style="margin: 23px 0 0 0;position: relative;">
+                    <button type="submit"  class="btn btn-primary animate-btn-background">Login</button>
+                    <div *ngIf="showSpinner" class="spinner-border" role="status" style="position: absolute;width: 12px;height: 12px;top: 37%;right: 85px;">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <small style="font-size: 14px;margin: 28px 0 0 0;">Don't have an Account ?</small>
+        <div style="margin: 17px 0 0 0;">
+            <button [routerLink]="['./sign-up']" class="btn btn-primary sign-up animate-btn-background">Sign Up</button>
+        </div>
+        <div class="mt-2">
+            <small><span [routerLink]="['./send-mail']" class="animate-bottom-border"  style="cursor: pointer;">Click Here</span> If mail not verified.</small>
+        </div>
+    </div>
+    <div class="image-part" >
+
+    </div>
+</div>

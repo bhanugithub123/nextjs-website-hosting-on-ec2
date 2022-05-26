@@ -1,0 +1,16 @@
+<div class="container-fluid" style="padding: 0;margin: 17px 0 11px 0;">
+    <div *ngIf="!data_loaded" class="text-center mt-2">
+        <button class="btn btn-primary" style="background-color: #3BCBFF;border: none;color: #111D35;">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Loading Data...
+        </button>
+    </div>
+    <div *ngIf="data_loaded" class="grid-container">
+        <span></span>
+        <span style="text-align: center;font-size: 16px;font-family: 'Open Sans', sans-serif;color: #101010;font-weight: 600;">Thumbnail</span>
+        <span style="padding: 0 0 0 10px;font-size: 16px;font-family: 'Open Sans', sans-serif;color: #101010;font-weight: 600;">Space occupied</span>
+    </div>
+    <div *ngIf="data_loaded" style="overflow: auto;height: calc(100vh - 13rem);padding: 0 26px;">
+        <storage-card *ngFor="let data of data_list" [storage_details]="data"></storage-card>
+    </div>
+</div>

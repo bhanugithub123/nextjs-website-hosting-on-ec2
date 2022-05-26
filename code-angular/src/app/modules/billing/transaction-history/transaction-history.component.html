@@ -1,0 +1,18 @@
+<div class="container-fluid" style="padding: 0; background-color: #F0F0F7;display: block;height: 100%;">
+    <div class="d-flex align-items-center justify-content-start" style="height: 107px;"> 
+        <amount-available>{{amountAvailable}}$</amount-available>
+        <common-storage-details>80%</common-storage-details>
+    </div>
+    <filter-bar
+     (reload)="LoadTransactionHistory()" 
+     (date_range)="LoadTransactionHistoryDateFilter($event)" 
+     (filter)="Filter($event)"
+     >
+    </filter-bar>
+
+    <transaction-list 
+     [data]="Filtered_transaction_details" 
+     [data_loaded]="data_loaded"
+     [filter] = "filter"
+     ></transaction-list>
+</div>

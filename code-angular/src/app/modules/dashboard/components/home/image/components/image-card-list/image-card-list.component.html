@@ -1,0 +1,9 @@
+<div>
+    <div class="grid-container">
+        <div *ngFor="let data of imageData">
+            <image-card [imageData]="data" (Image_selected)="onChange()">
+                
+            </image-card>
+        </div>
+    </div>
+</div>

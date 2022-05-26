@@ -1,0 +1,28 @@
+<div style="box-shadow: 0px 0px 10px #00000024; margin: 20px 20px 20px 0; position: relative; background-color: #FFF; padding: 13px 0 0 5px;width: 440px;overflow: hidden;">
+    <h3 style="margin: 0;color: #B4B4B4;font-size: 15px;font-family: 'Open Sans', sans-serif;">Profit and Loss Chart</h3>
+    <div class="d-flex align-items-center" style="position: absolute;z-index: 2;right: 48px;top:13px;">
+        <div style="position: relative;margin: 0 21px 0 0;">
+            <select #year class="form-select year" (change)="onDateChange()">
+                <option *ngFor="let yrs of Years" [value]="yrs">{{ yrs }}</option>
+            </select>
+            <img style="position: absolute;z-index: 2;right: 5px;top: 50%;transform: translate(0,-50%);" src="/assets/icons/arrow-d-b.svg" alt="drop-icon">
+        </div>
+        <div style="position: relative;">
+            <select #month class="form-select month" (change)="onDateChange()">
+                <ng-container *ngFor="let mn of Months;let i = index;">
+                    <ng-container *ngIf="i + 1 <= ReqMonth? true : false;">
+                        <option  [value]="i + 1">{{ mn }}</option>
+                    </ng-container>
+                </ng-container>                
+            </select>
+            <img style="position: absolute;z-index: 2;right: 5px;top: 50%;transform: translate(0,-50%);" src="/assets/icons/arrow-d-w.svg" alt="drop-icon">
+        </div>
+    </div>
+    <div style="padding: 50px 0 0 0;">
+        <highcharts-chart 
+            [Highcharts]="Highcharts"
+            [options]="chartOptions"
+            style="width: 420px; height: 338px; display: block;"
+        ></highcharts-chart>
+    </div>
+</div>

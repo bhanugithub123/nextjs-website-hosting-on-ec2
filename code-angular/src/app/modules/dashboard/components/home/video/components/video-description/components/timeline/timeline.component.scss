@@ -1,0 +1,50 @@
+.timeline-container{
+  overflow-y: auto;
+  height: calc(100vh - 28rem);
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #3BCBFF aliceblue;
+  min-height: 280px;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: 85px 85px;
+    column-gap: 10px;
+    row-gap: 10px;
+    .grid-col{
+        height: 85px;
+    }
+}
+@media(min-width: 1496px){
+  .timeline-container{
+    width: 103%;
+  }
+  .grid-container{
+    grid-template-columns: repeat(3, 100px);
+  } 
+}
+@media(min-width: 1596px){
+  .grid-container{
+    grid-template-columns: repeat(4, 100px);
+  }
+}
+@media(min-width: 1696px){
+  .grid-container{
+    grid-template-columns: repeat(5, 100px);
+  }
+}
+@media(min-width: 1815px){
+  .grid-container{
+    grid-template-columns: repeat(6, 100px);
+  }
+}
+@media(min-width: 1896px){
+  .grid-container{
+    grid-template-columns: repeat(7, 100px);
+  }
+}
+@media(min-width: 1956px){
+  .grid-container{
+    grid-template-columns: repeat(8, 100px);
+  }
+}

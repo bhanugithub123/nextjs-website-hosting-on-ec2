@@ -1,0 +1,114 @@
+<div id="wrapper-all" style="background-color: #000;">
+    <div #svg_wrapper id="svg-wrapper">
+        <svg  *ngIf="!showSpinner" [ngStyle]="{'width': svgWidth, 'height':svgHeight}">
+            <g id="svg1">
+    
+            </g>
+        </svg>
+        <svg  *ngIf="!showSpinner" [ngStyle]="{'width': svgWidth, 'height':svgHeight}">
+            <g id="svg2">
+    
+            </g>
+        </svg>
+        <svg  *ngIf="!showSpinner" [ngStyle]="{'width': svgWidth, 'height':svgHeight}">
+            <g id="svg3">
+    
+            </g>
+        </svg>
+        <svg  *ngIf="!showSpinner" [ngStyle]="{'width': svgWidth, 'height':svgHeight}">
+            <g id="svg4">
+    
+            </g>
+        </svg>
+        <svg  *ngIf="!showSpinner" [ngStyle]="{'width': svgWidth, 'height':svgHeight}">
+            <g id="svg5">
+    
+            </g>
+        </svg>
+        <svg  *ngIf="!showSpinner" [ngStyle]="{'width': svgWidth, 'height':svgHeight}">
+            <g id="svg6">
+    
+            </g>
+        </svg>
+        <div *ngIf="showSpinner" class="text-center spinner-video">
+            <button class="btn btn-primary" style="background-color: #3BCBFF;border: none;color: #111D35;">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Loading Video...
+            </button>
+        </div>
+    </div>
+    <div #video1 id="video1">
+        <!-- video controls -->
+        <div class="control-wrapper">
+            <!-- play controls -->
+            <div class="video-controls"> 
+                <img
+                src="/assets/icons/Icon awesome-step-back.svg" 
+                alt="back"
+                >
+                <img 
+                *ngIf="!isplaying"
+                class="mx-3"
+                (click)="playVideo()"
+                src="../../../../../../../../assets/icons/Icon ionic-ios-play.svg" 
+                alt="play"
+                >
+                <img 
+                *ngIf="isplaying"
+                class="mx-3"
+                (click)="playVideo()"
+                src="../../.././../../../../../../assets/icons/Icon material-pause.svg" 
+                alt="pause"
+                >
+                <img 
+                src="./assets/icons/Icon awesome-step-forward.svg" 
+                alt="forward"
+                >
+            </div>
+            <!-- progress  -->
+            <div class="video-progress">
+                <div>
+                    <span style="color: white;">
+                        {{time}}
+                    </span>
+                </div>
+
+                <div *ngIf="showSeekTime" [ngStyle]="seekLeft" class="seek-icon">
+                    <span>
+                        {{ seekTime }}
+                    </span>
+                </div>
+
+                <div #progressBar (mouseover)="SeekTime($event)" (mouseout)="SeekTime($event)" (click)="ChangeProgress($event)" class="progress" style="margin: 0 5px;">
+                    <div id="progress" class="progress-bar" style="background-color: red;"></div>
+                </div>
+
+                <div>
+                    <div id="vol" style="position: relative;">
+                        <input *ngIf="showVolumeSlider" (input)="ChangeVolume($event)" class="slider" type="range" min="1" max="100" value="50">
+                    </div>
+                    <img (click)=ToggleShowVolumeSlider() src="./assets/icons/Icon ionic-ios-volume-low.svg" alt="volume">
+                </div>
+                <div style="margin: 0 0 0 10px;">
+                    <span style="color: white;">
+                        {{totalTime}}
+                    </span>
+                </div>
+                <div class="d-flex" style="margin-left: 25px;">
+                    <img 
+                     (click)="ToggleFullscreen()" 
+                     *ngIf="!fullscreen" 
+                     src="./assets/icons/Icon material-fullscreen.svg" 
+                     alt="fullscreen"
+                     >
+                    <img 
+                     (click)="ToggleFullscreen()" 
+                     *ngIf="fullscreen" 
+                     src="./assets/icons/Icon material-fullscreen-exit.svg" 
+                     alt="fullscreen-exit"
+                     >
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

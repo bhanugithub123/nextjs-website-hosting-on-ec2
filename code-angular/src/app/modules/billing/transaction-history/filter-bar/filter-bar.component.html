@@ -1,0 +1,4 @@
+<div class="container-fluid grid-container" style="height: 55px;background-color: #DEDEDE;">
+    <filter-dropdown (dropdown_filter)="Filter($event)"></filter-dropdown>
+    <filterdate-range (reload)="onReload()" (date_range)="EmitDate($event)"></filterdate-range>
+</div>

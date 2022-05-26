@@ -1,0 +1,159 @@
+<div id="header" class="d-flex align-items-center">
+    <div class="container-fluid" style="padding: 0;">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center" style="padding-left: 18px;flex-basis: 50%;position: relative;">
+                <img style="position: absolute;left: 25px;" *ngIf="showUploadElements" src="../../../../../assets/icons/Search Icon.svg" alt="search">
+                <input
+                 *ngIf="showUploadElements" 
+                 (input)="Search($event)" 
+                 (click)="ToggleSearch()" 
+                 [value]="term" 
+                 type="text" 
+                 name="search" 
+                 class="form-control" 
+                 placeholder="Search" 
+                 autocomplete="off" 
+                 >
+            </div>
+            <div class="d-flex align-items-center">
+                <div class="upload" >
+                    <button *ngIf="showUploadElements" (click)="upload()"  class="btn btn-primary upload-btn"><span>Upload</span></button>
+                </div>
+                <div class="d-flex align-items-center" style="padding: 0 0.75rem 0 0;">
+                    <div style="position: relative;">
+                        <button (click)="toggleDropdown()" class="btn">
+                            {{ userName }}
+                            <img style="margin-left: 5px;" src="/assets/icons/Path 26.svg" alt="dropdown">
+                        </button>
+                        <div *ngIf="showModals" class="dropdown-menu1">
+                            <a class="dropdown-item" id="menu2" (click)="toggleDropdown()" [routerLink]="['/user-details']">
+                                <span style="padding-right: 25px;">
+                                    <img src="/assets/icons/Icon awesome-user-alt.svg" alt="Account Settings">
+                                </span>Account settings
+                            </a>
+                            <hr style="margin: 0 1.25rem 0;">
+                            <a class="dropdown-item" (click)="toggleDropdown()" [routerLink]="['/billing/transactions']">
+                                <span style="padding: 0 27px 0 3px;">
+                                  <img src="/assets/icons/Icon awesome-file-invoice-dollar.svg" alt="Transaction History">
+                                </span>Transaction History
+                            </a>
+                            <hr style="margin: 0 1.25rem 0;">
+                            <a class="dropdown-item" (click)="toggleDropdown()" [routerLink]="['/billing/storage']">
+                                <span style="padding: 0 27px 0 2px;">
+                                  <img src="/assets/icons/Path 439 (1).svg" alt="Storage Details">
+                                </span>Storage Details
+                            </a>
+                            <hr style="margin: 0 1.25rem 0;">
+                            <a class="dropdown-item" (click) = "logout()" >
+                                <span style="padding: 0 28px 0 0px;">
+                                    <img src="/assets/icons/Icon open-account-logout.svg" alt="Logout">
+                                </span>Logout
+                            </a>
+                        </div>
+                    </div>
+                    <div class="profile-img" [ngStyle]="profilePic" [ngClass]="{'loading': imageLoading}">
+                        <div *ngIf="imageLoading" class="spinner-border text-light" style="width: 1rem;height: 1rem;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- drop down toggle close window -->
+    <div *ngIf="showModals" class="dropdown-modal-close" [ngStyle]="{'min-width': minWidth}" (click)="toggleDropdown()">
+        <div>
+
+        </div>
+    </div>
+    <!-- search modal  -->
+    <div class="modal fade show" id="modal" (click)="closeSearch($event)" [ngStyle]="searchVisible" style="height: calc(100vh - 45px); display: block; top: 45px;background: rgba(0,0,0,0.1);">
+        <div class="modal-dialog" style="margin: 25px 0 0 449px;top: -30px;">
+          <div
+           class="modal-content"  
+           [ngStyle]="{'height': filteredImages.length < 2 && filteredVideos.length < 2 ? '165px': '280px'}"
+           style="width: 610px;border-radius: 5px;border: none;left: -170px;box-shadow: 0px 1px 7px 0px;"
+           >
+            <div class="container-fluid p-0" >
+                <div style="padding: 10px;">
+                    <ul class="nav nav-tabs" *ngIf="term.length > 0? true:false">
+                        <li class="nav-item" style="margin: 0 25px 0 0;">
+                          <a
+                           #video
+                           class="nav-link"
+                           [ngClass]="{'active': !setImageActive}"
+                           (click)="ToggleVideo()"
+                           >
+                           <img style="padding-bottom: 3px;" *ngIf="!setImageActive" src="../../../../../assets/icons/Icon awesome-video.svg" alt="Video">
+                           <img style="padding-bottom: 3px;" *ngIf="setImageActive" src="../../../../../assets/icons/Icon awesome-video alt.svg" alt="Video"> Video</a> 
+                        </li>
+                        <li class="nav-item">
+                          <a
+                           #image
+                           class="nav-link" 
+                            (click)="ToggleImage()"
+                            [ngClass]="{'active': setImageActive}"
+                           >
+                           <img style="padding-bottom: 3px;" *ngIf="!setImageActive" src="../../../../../assets/icons/Icon ionic-md-image.svg" alt="Image">
+                           <img style="padding-bottom: 3px;" *ngIf="setImageActive" src="../../../../../assets/icons/Icon ionic-md-image alt.svg" alt="Image"> Image</a>
+                        </li>
+                    </ul>
+                </div> 
+                <div 
+                 *ngIf="!setImageActive" 
+                 [ngStyle]="{'height': !setImageActive && filteredVideos.length < 2 ? '110px': '225px','overflow': filteredVideos.length < 2 && !setImageActive ? 'hidden': 'auto'}" 
+                 style="overflow-y: auto;"
+                 >
+                    <ng-container *ngIf="filteredVideos.length > 0">
+                        <div *ngFor="let vid of filteredVideos">
+                            <div (click)="OpenVideo(vid.id, vid.url_name, vid.date, vid.isSample)" class="d-flex align-items-center" style="padding: 0 31px;cursor: pointer;">
+                                <div class="video d-flex align-items-center justify-content-center">
+                                    <img width="65px" height="65px" [src]="vid.thumbnail" alt="video">
+                                </div>
+                                <span style="margin: 0 0 0 27px;width: 400px;">{{ vid.name }}</span>
+                            </div> 
+                            <hr>                         
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="filteredVideos.length === 0">
+                        <h4 style="text-align: center;">No Video Found</h4>
+                    </ng-container>
+                </div>
+                <div 
+                 *ngIf="setImageActive" 
+                 [ngStyle]="{'height': filteredImages.length < 2 && setImageActive ? '110px': '225px','overflow': filteredImages.length < 2 && setImageActive ? 'hidden': 'auto'}" 
+                 style="overflow-y: auto;"
+                 >
+                    <ng-container *ngIf="filteredImages.length > 0">
+                        <div *ngFor="let img of filteredImages">
+                            <div (click)="OpenImage(img.id, img.name, img.date, img.url, img.isSample)" class="d-flex align-items-center" style="padding: 0 31px;cursor: pointer;">
+                                <div class="video d-flex align-items-center justify-content-center">
+                                    <img width="65px" height="65px" [src]="img.thumbnail" alt="video">
+                                </div>
+                                <span style="margin: 0 0 0 27px;width: 400px;">{{ img.name }}</span>
+                            </div> 
+                            <hr>                      
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="filteredImages.length === 0">
+                        <h4 style="text-align: center;">No Image Found</h4>
+                    </ng-container>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+<!-- upload modal  -->
+<div id="modal-wrapper" (click)="CloseModal($event)" class="modal fade show" style="padding-right: 15px;overflow-y: auto;background: rgba(0,0,0,0.7);min-width: 1135px;"  [ngStyle]="display">
+    <div class="modal-dialog-1" >
+      <div class="modal-content" style="width: 745px;height: 527px;border-radius: 6px;background: #081122;">
+        <div style="background-color: #081122; border-top-right-radius: 5px; border-top-left-radius: 5px;height: 25px;position: relative;">
+            <img style="position: absolute;top: 10px;right: 10px;cursor: pointer;" (click)="close()" src="../../../../../assets/icons/Icon ionic-ios-close.svg" alt="close">
+        </div>
+        <div>
+            <app-upload *ngIf="UploadComp"></app-upload>
+        </div>
+      </div>
+    </div>
+</div>
+

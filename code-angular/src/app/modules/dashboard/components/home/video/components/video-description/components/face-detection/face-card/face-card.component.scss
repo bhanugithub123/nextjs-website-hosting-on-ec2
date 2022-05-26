@@ -1,0 +1,40 @@
+.card-container{
+    width: 821px;
+    height: 50px;
+    background: #F3F3F3;
+    box-shadow: 0px 3px 6px #0000001a;
+    border-radius: 4px;
+    display: grid;
+    align-items: center;
+    justify-content: start;
+    grid-template-columns: 154px auto;
+    margin: 10px 0;
+    .main-content{
+      .timestamps{
+        width: 630px;
+        height: 9px;
+        background: #D6D6D6;
+        border-radius: 10px;
+        position: relative;
+        .tool-tip{
+          position: absolute;
+        }
+      }
+    }
+}
+
+.bg-red{
+  background-color: red!important;
+}
+.bg-orange{
+  background-color: orange!important;
+}
+.bg-yellow{
+  background-color: yellow!important;
+}
+.bg-blue{
+  background-color: #0D76FF!important;
+}
+.bg-green{
+  background-color: green!important;
+}
